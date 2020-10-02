@@ -1,5 +1,6 @@
 .profile__add-button {
 	width: 150px;
+	min-width: 150px;
 	height: 50px;
 	background-image: url("../../../images/svg/icon+.svg");
 	background-position: center;
