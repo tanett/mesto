@@ -9,69 +9,82 @@
 </head>
 
 <body class="page">
-  <header class="header">
-    <div class="logo"></div>
-  </header>
-  <main class="main">
-    <section class="profile">
-      <img src="./images/avatar.png" alt="аватарка" class="profile__avatar">
-      <h1 class="profile__name">Жак-Ив Кусто</h1>
-      <p class="profile__descr">Исследователь океана</p>
-      <button class="profile__edit-button"></button>
-    </section>
-    <button class="add-button"></button>
-    <section class="photo-grid">
-      <figure class="photo-grid__item">
-        <img class="photo-grid__picture" alt="картинка" src="./images/place_karach-cherck.png">
-        <figcaption class="photo-grid __item-title " >Карачаевск
-          <button class="photo-grid__like"></button>
-        </figcaption>
-        
-      </figure>
-      <figure class="photo-grid__item">
-        <img class="photo-grid__picture" alt="картинка" src="./images/place_elbrus.png">
-        <figcaption class="photo-grid __item-title " >Гора Эльбрус
-          <button class="photo-grid__like"></button>
-        </figcaption>
-        
-      </figure>
-      <figure class="photo-grid__item">
-        <img class="photo-grid__picture" alt="картинка" src="./images/place_dombay1.png">
-        <figcaption class="photo-grid __item-title " >Домбай
-          <button class="photo-grid__like"></button>
-        </figcaption>
-        
-      </figure>
-      <figure class="photo-grid__item">
-        <img class="photo-grid__picture" alt="картинка" src="./images/place_elbrus.png">
-        <figcaption class="photo-grid __item-title " >Гора Эльбрус
-          <button class="photo-grid__like"></button>
-        </figcaption>
-        
-      </figure>
-      <figure class="photo-grid__item">
-        <img class="photo-grid__picture" alt="картинка" src="./images/place_kirill-pershin-1556355-unsplash.png">
-        <figcaption class="photo-grid __item-title " >Домбай
-          <button class="photo-grid__like"></button>
-        </figcaption>
-        
-      </figure>
-      <figure class="photo-grid__item">
-        <img class="photo-grid__picture" alt="картинка" src="./images/place_karach-cherck.png">
-        <figcaption class="photo-grid __item-title " >Карачаево-Черкесск
-          <button class="photo-grid__like"></button>
-        </figcaption>
-        
-      </figure>
-    </section>
+  <div class="page__wrap">
+    <header class="header">
+      <div class="header__logo"></div>
+    </header>
+    <main class="main">
+
+      <section class="profile">
+        <div class="profile__wrap">
+          <img src="./images/avatar.png" alt="аватарка" class="profile__avatar">
+          <div class="profile__about">
+            <div class="profile__title">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button class="profile__edit-button"></button>
+            </div>
+
+            <p class="profile__descr">Исследователь океана</p>
+          </div>
+        </div>
+  
+  <button class="profile__add-button"></button>
+  </section>
+
+
+  <section class="photo-grid">
+    <figure class="photo-grid__item">
+      <img class="photo-grid__picture" alt="картинка" src="./images/place_karach-cherck.png">
+      <figcaption class="photo-grid __item-title ">Карачаевск
+        <button class="photo-grid__like"></button>
+      </figcaption>
+
+    </figure>
+    <figure class="photo-grid__item">
+      <img class="photo-grid__picture" alt="картинка" src="./images/place_elbrus.png">
+      <figcaption class="photo-grid __item-title ">Гора Эльбрус
+        <button class="photo-grid__like"></button>
+      </figcaption>
+
+    </figure>
+    <figure class="photo-grid__item">
+      <img class="photo-grid__picture" alt="картинка" src="./images/place_dombay1.png">
+      <figcaption class="photo-grid __item-title ">Домбай
+        <button class="photo-grid__like"></button>
+      </figcaption>
+
+    </figure>
+    <figure class="photo-grid__item">
+      <img class="photo-grid__picture" alt="картинка" src="./images/place_elbrus.png">
+      <figcaption class="photo-grid __item-title ">Гора Эльбрус
+        <button class="photo-grid__like"></button>
+      </figcaption>
+
+    </figure>
+    <figure class="photo-grid__item">
+      <img class="photo-grid__picture" alt="картинка" src="./images/place_kirill-pershin-1556355-unsplash.png">
+      <figcaption class="photo-grid __item-title ">Домбай
+        <button class="photo-grid__like"></button>
+      </figcaption>
+
+    </figure>
+    <figure class="photo-grid__item">
+      <img class="photo-grid__picture" alt="картинка" src="./images/place_karach-cherck.png">
+      <figcaption class="photo-grid __item-title ">Карачаево-Черкесск
+        <button class="photo-grid__like"></button>
+      </figcaption>
+
+    </figure>
+  </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">@copy; 2020 Mesto Russia</p>
   </footer>
+  </div>
   <div class="popup">
 
   </div>
-<script src="./scripts/scripts.js"></script>
+  <script src="./scripts/scripts.js"></script>
 </body>
 
 </html>
