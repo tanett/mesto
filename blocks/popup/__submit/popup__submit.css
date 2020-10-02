@@ -1,0 +1,19 @@
+.popup__submit {
+	width: 100%;
+	background-color: black;
+	border: none;
+	border-radius: 2px;
+	color: #FFFFFF;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 22px;
+	text-align: center;
+	margin-top: 48px;
+	padding-top: 16px;
+	padding-bottom: 16px;
+}
+
+.popup__submit:hover , .popup__submit:focus {
+	background-color: rgba(0, 0, 0, 0.8);
+	cursor: pointer;
+}

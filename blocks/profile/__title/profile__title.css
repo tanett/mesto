@@ -3,4 +3,12 @@
   padding: 0;
   display: flex;
   flex-wrap: nowrap;
+  align-items: baseline;
+}
+
+@media screen and (max-width: 530px) {
+  .profile__wrap {
+    text-align: center;
+
+  }
 }

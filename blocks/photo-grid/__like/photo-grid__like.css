@@ -1,0 +1,19 @@
+.photo-grid__like {
+	width: 21px;
+	height: 17px;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-image: url("../../../images/svg/icon-heart.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	transition: scale 0.5s;
+}
+
+.photo-grid__like:hover, .photo-grid__like:focus, .photo-grid__like:active {
+	cursor: pointer;
+	transform: scale(1.15);
+}

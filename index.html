@@ -2,89 +2,97 @@
 <html lang="ru">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Место</title>
-  <link rel="stylesheet" href="./pages/index.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Место</title>
+	<link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="page">
-  <div class="page__wrap">
-    <header class="header">
-      <div class="header__logo"></div>
-    </header>
-    <main class="main">
+<div class="page__wrap">
+	<header class="header">
+		<div class="header__logo"></div>
+	</header>
+	<main class="main">
+		<section class="profile">
+			<div class="profile__wrap">
+				<img src="./images/avatar.png" alt="аватарка" class="profile__avatar">
+				<div class="profile__about">
+					<div class="profile__title">
+						<h1 class="profile__name">Жак-Ив Кусто</h1>
+						<span class="profile__edit-button"></span>
+					</div>
+					<p class="profile__descr">Исследователь океана</p>
+				</div>
+			</div>
+			<button class="profile__add-button"></button>
+		</section>
+		<section class="photo-grid">
+			<figure class="photo-grid__item">
+				<img class="photo-grid__picture" alt="картинка" src="./images/place_karach-cherck.png">
+				<figcaption class="photo-grid__item-title ">
+					<h2 class="photo-grid__item-name">Карачаевск</h2>
+					<span class="photo-grid__like"></span>
+				</figcaption>
+			</figure>
+			<figure class="photo-grid__item">
+				<img class="photo-grid__picture" alt="картинка" src="./images/place_elbrus.png">
+				<figcaption class="photo-grid__item-title ">
+					<h2 class="photo-grid__item-name">Гора Эльбрус</h2>
+					<button class="photo-grid__like"></button>
+				</figcaption>
 
-      <section class="profile">
-        <div class="profile__wrap">
-          <img src="./images/avatar.png" alt="аватарка" class="profile__avatar">
-          <div class="profile__about">
-            <div class="profile__title">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <button class="profile__edit-button"></button>
-            </div>
+			</figure>
+			<figure class="photo-grid__item">
+				<img class="photo-grid__picture" alt="картинка" src="./images/place_dombay1.png">
+				<figcaption class="photo-grid__item-title ">
+					<h2 class="photo-grid__item-name">Домбай</h2>
+					<button class="photo-grid__like"></button>
+				</figcaption>
 
-            <p class="profile__descr">Исследователь океана</p>
-          </div>
-        </div>
-  
-  <button class="profile__add-button"></button>
-  </section>
+			</figure>
+			<figure class="photo-grid__item">
+				<img class="photo-grid__picture" alt="картинка" src="./images/place_elbrus.png">
+				<figcaption class="photo-grid__item-title ">
+					<h2 class="photo-grid__item-name">Гора Эльбрус</h2>
+					<button class="photo-grid__like"></button>
+				</figcaption>
 
+			</figure>
+			<figure class="photo-grid__item">
+				<img class="photo-grid__picture" alt="картинка" src="./images/place_kirill-pershin-1556355-unsplash.png">
+				<figcaption class="photo-grid__item-title ">
+					<h2 class="photo-grid__item-name">Домбай</h2>
+					<button class="photo-grid__like"></button>
+				</figcaption>
 
-  <section class="photo-grid">
-    <figure class="photo-grid__item">
-      <img class="photo-grid__picture" alt="картинка" src="./images/place_karach-cherck.png">
-      <figcaption class="photo-grid __item-title ">Карачаевск
-        <button class="photo-grid__like"></button>
-      </figcaption>
+			</figure>
+			<figure class="photo-grid__item">
+				<img class="photo-grid__picture" alt="картинка" src="./images/place_karach-cherck.png">
+				<figcaption class="photo-grid__item-title ">
+					<h2 class="photo-grid__item-name">Карачаево-Черкесск</h2>
+					<button class="photo-grid__like"></button>
+				</figcaption>
 
-    </figure>
-    <figure class="photo-grid__item">
-      <img class="photo-grid__picture" alt="картинка" src="./images/place_elbrus.png">
-      <figcaption class="photo-grid __item-title ">Гора Эльбрус
-        <button class="photo-grid__like"></button>
-      </figcaption>
-
-    </figure>
-    <figure class="photo-grid__item">
-      <img class="photo-grid__picture" alt="картинка" src="./images/place_dombay1.png">
-      <figcaption class="photo-grid __item-title ">Домбай
-        <button class="photo-grid__like"></button>
-      </figcaption>
-
-    </figure>
-    <figure class="photo-grid__item">
-      <img class="photo-grid__picture" alt="картинка" src="./images/place_elbrus.png">
-      <figcaption class="photo-grid __item-title ">Гора Эльбрус
-        <button class="photo-grid__like"></button>
-      </figcaption>
-
-    </figure>
-    <figure class="photo-grid__item">
-      <img class="photo-grid__picture" alt="картинка" src="./images/place_kirill-pershin-1556355-unsplash.png">
-      <figcaption class="photo-grid __item-title ">Домбай
-        <button class="photo-grid__like"></button>
-      </figcaption>
-
-    </figure>
-    <figure class="photo-grid__item">
-      <img class="photo-grid__picture" alt="картинка" src="./images/place_karach-cherck.png">
-      <figcaption class="photo-grid __item-title ">Карачаево-Черкесск
-        <button class="photo-grid__like"></button>
-      </figcaption>
-
-    </figure>
-  </section>
-  </main>
-  <footer class="footer">
-    <p class="footer__copyright">@copy; 2020 Mesto Russia</p>
-  </footer>
-  </div>
-  <div class="popup">
-
-  </div>
-  <script src="./scripts/scripts.js"></script>
+			</figure>
+		</section>
+	</main>
+	<footer class="footer">
+		<p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+	</footer>
+</div>
+<div class="popup">
+	<form class="popup__container">
+		<h1 class="popup__title">Редактировать профиль</h1>
+		<fieldset class="popup__inputs">
+			<input type="text" class="popup__input" name="name" placeholder="Жак-Ив Кусто">
+			<input type="text" class="popup__input" name="about" placeholder="Исследователь океана">
+			<button type="submit" class="popup__submit">Сохранить</button>
+		</fieldset>
+		<button class="popup__close-button"></button>
+	</form>
+</div>
+<script src="./scripts/scripts.js"></script>
 </body>
 
 </html>
