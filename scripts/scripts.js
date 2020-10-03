@@ -1,13 +1,12 @@
 const buttonOpenPopup = document.querySelector('.profile__edit-button');
 const buttonClosePopup = document.querySelector('.popup__close-button');
 const popup = document.querySelector('.popup');
+const form = document.querySelector('.popup__container');
+
 
 function popupToggle() {
     popup.classList.toggle('popup_opened')
 }
-
-buttonClosePopup.addEventListener('click', popupToggle);
-buttonOpenPopup.addEventListener('click', popupToggle);
 
 function onMissclickPopup(event) {
     if (event.target !== event.currentTarget) {
@@ -15,11 +14,6 @@ function onMissclickPopup(event) {
     }
     popupToggle();
 }
-
-popup.addEventListener('click', onMissclickPopup);
-
-
-let form = document.querySelector('.popup__container');
 
 function formSubmitHandler(evt) {
     evt.preventDefault();
@@ -35,5 +29,8 @@ function formSubmitHandler(evt) {
     popupToggle();
 }
 
-
+popup.addEventListener('click', onMissclickPopup);
+buttonOpenPopup.addEventListener('click', popupToggle);
+buttonClosePopup.addEventListener('click', popupToggle);
+buttonClosePopup.event.stopPropagation();
 form.addEventListener('submit', formSubmitHandler);
