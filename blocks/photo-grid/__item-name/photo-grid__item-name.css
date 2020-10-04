@@ -1,4 +1,5 @@
 .photo-grid__item-name {
+	max-width: 85%;
 	font-weight: 900;
 	font-size: 24px;
 	line-height: 29px;

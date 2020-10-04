@@ -11,3 +11,10 @@
 	-moz-text-size-adjust: 100%;
 	text-rendering: optimizeLegibility;
 }
+
+@media screen and (max-width: 320px) {
+	.page {
+		padding-top: 27px;
+		padding-bottom: 36px;
+	}
+}
