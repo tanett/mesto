@@ -1,21 +1,53 @@
-const buttonOpenPopup = document.querySelector('.profile__edit-button');
-const buttonClosePopup = document.querySelector('.popup__close-button');
-const popup = document.querySelector('.popup');
-const form = document.querySelector('.popup__container');
+// для попапа редактирования профиля
+const buttonOpenPopupEdit = document.querySelector('.profile__edit-button');
+const popupEditUserProfile = document.querySelector('.popup_edit-user-profile');
+const formEdit = document.querySelector('.popup__container_edit');
 let nameInput = document.querySelector('.popup__input_name');
-let jobInput = document.querySelector('.popup__input_about');
+let aboutInput = document.querySelector('.popup__input_about');
 let profileName = document.querySelector('.profile__name');
 let profileDescr = document.querySelector('.profile__descr');
 
+// для окна добавления фото
+const buttonOpenPopupAdd = document.querySelector('.profile__add-button');
+const popupAddPict = document.querySelector('.popup_add-pict');
+const formAdd = document.querySelector('.popup__container_add-photo');
+let photoGridItemName = document.querySelector('.photo-grid__item-name');
+let titleInput = document.querySelector('.popup__input_title');
+let linkInput = document.querySelector('.popup__input_link');
 
-function popupOpen() {
+//общие для всех попапов
+const buttonsClosePopup = document.querySelectorAll('.popup__close-button');
+const popups= document.querySelectorAll('.popup');
+
+//попап фуллсайз картинки
+const popupShowPict = document.querySelector('.popup_show-pict');
+const photoGridPictures = document.querySelectorAll('.photo-grid__picture');
+let photoGridPicture = document.querySelector('.photo-grid__picture');
+let popupFullsizePict = document.querySelector('.popup__fullsize-pict');
+
+//лайк фото
+const photoLikes = document.querySelectorAll('.photo-grid__like');
+
+
+
+function popupOpenEdit() {
      nameInput.value =  profileName.textContent;
-     jobInput.value = profileDescr.textContent ;
-    popup.classList.add('popup_opened');
+     aboutInput.value = profileDescr.textContent ;
+    popupEditUserProfile.classList.add('popup_opened');
 }
+
+function popupOpenAdd() {
+    popupAddPict.classList.add('popup_opened');
+}
+function popupOpenPict(event) {
+    popupFullsizePict.src = event.target.src;
+    popupShowPict.classList.add('popup_opened');
+}
+
 
 function popupClose() {
-    popup.classList.remove('popup_opened');
+    popups.forEach(popup => {popup.classList.remove('popup_opened')})
+
 }
 
 function onMissclickPopup(event) {
@@ -25,51 +57,40 @@ function onMissclickPopup(event) {
     popupClose();
 }
 
-function formSubmitHandler(evt) {
+function formSubmitHandlerEditUserProfile(evt) {
     evt.preventDefault();
     console.log(nameInput.value);
-    console.log(jobInput.value);
+    console.log(aboutInput.value);
     profileName.textContent = nameInput.value;
-    profileDescr.textContent = jobInput.value;
+    profileDescr.textContent = aboutInput.value;
     popupClose();
 }
 
-form.addEventListener('submit', formSubmitHandler);
-popup.addEventListener('click', onMissclickPopup);
-buttonOpenPopup.addEventListener('click', popupOpen);
-buttonClosePopup.addEventListener('click', popupClose);
-
-
-/*function popupToggle() {
-    popup.classList.toggle('popup_opened');
-}
-
-
-function onMissclickPopup(event) {
-    if (event.target !== event.currentTarget) {
-        return;
-    }
-    popupToggle();
-}
-function formSubmitHandler(evt) {
+function formSubmitHandlerAddPict(evt) {
     evt.preventDefault();
-    let nameInput = document.querySelector('.popup__input-name');
-    let jobInput = document.querySelector('.popup__input-about');
-    console.log(nameInput.value);
-    console.log(jobInput.value);
-    let profileName = document.querySelector('.profile__name');
-    let profileDescr = document.querySelector('.profile__descr');
-
-    profileName.textContent = nameInput.value;
-    profileDescr.textContent = jobInput.value;
-    popupToggle();
+    console.log(titleInput.value);
+    console.log(linkInput.value);
+    photoGridItemName = titleInput.value;
+    photoGridPicture.src = linkInput.value;
+    popupClose();
+    titleInput.value ='';
+    linkInput.value ='';
 }
 
-form.addEventListener('submit', formSubmitHandler);
-popup.addEventListener('click', onMissclickPopup);
-buttonOpenPopup.addEventListener('click', popupToggle);
-buttonClosePopup.addEventListener('click', popupToggle);
-buttonClosePopup.onclick = evt.stopPropagation(); */
+function changeLike(event) {
+    event.stopPropagation();
+    event.target.classList.toggle('photo-grid__like_on');
+}
+
+
+buttonOpenPopupEdit.addEventListener('click', popupOpenEdit);
+buttonOpenPopupAdd .addEventListener('click', popupOpenAdd);
+formEdit.addEventListener('submit', formSubmitHandlerEditUserProfile);
+formAdd.addEventListener('submit', formSubmitHandlerAddPict);
+popups.forEach(popup =>popup.addEventListener('click', onMissclickPopup));
+buttonsClosePopup.forEach((buttonClosePopup) => buttonClosePopup.addEventListener('click', popupClose));
+photoGridPictures.forEach((photoGridPicture) => photoGridPicture.addEventListener('click',popupOpenPict));
+photoLikes.forEach((like) => {like.addEventListener('click', changeLike)});
 
 
 

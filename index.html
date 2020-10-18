@@ -81,8 +81,8 @@
 		<p class="footer__copyright">&copy; 2020 Mesto Russia</p>
 	</footer>
 </div>
-<div class="popup ">
-	<form class="popup__container" name="editUserProfile">
+<div class="popup popup_edit-user-profile">
+	<form class="popup__container popup__container_edit" name="editUserProfile">
 		<h2 class="popup__title">Редактировать профиль</h2>
 		<fieldset class="popup__inputs">
 			<input type="text" class="popup__input popup__input_name" maxlength ="50" name="name" placeholder="Жак-Ив Кусто">
@@ -92,6 +92,25 @@
 		</fieldset>
 		<button class="popup__close-button" type="button"></button>
 	</form>
+</div>
+<div class="popup popup_add-pict">
+	<form class="popup__container popup__container_add-photo" name="addPict">
+		<h2 class="popup__title">Новое место</h2>
+		<fieldset class="popup__inputs">
+			<input type="text" class="popup__input popup__input_title" maxlength ="50" name="title" placeholder="Название">
+
+			<input type="text" class="popup__input popup__input_link" maxlength ="100" name="link" placeholder="Ссылка на картинку">
+			<button type="submit" class="popup__submit">Сохранить</button>
+		</fieldset>
+		<button class="popup__close-button" type="button"></button>
+	</form>
+</div>
+<div class="popup popup_show-pict">
+	<figure class="popup__container popup__container_pict-container">
+		<img class="popup__fullsize-pict" src="#" alt="фото">
+		<figcaption class="popup__pict-title"></figcaption>
+		<button class="popup__close-button" type="button"></button>
+	</figure>
 </div>
 <script src="./scripts/scripts.js"></script>
 </body>
