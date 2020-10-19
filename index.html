@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Место</title>
 	<link rel="stylesheet" href="./pages/index.css">
+	<script src="./scripts/scripts.js" defer></script>
 </head>
 
 <body class="page">
@@ -28,53 +29,53 @@
 			<button class="profile__add-button" type="button"></button>
 		</section>
 		<section class="photo-grid">
-			<figure class="photo-grid__item">
-				<img class="photo-grid__picture" alt="картинка" src="./images/place_karach-cherck.png">
-				<figcaption class="photo-grid__item-title ">
-					<h2 class="photo-grid__item-name">Карачаевск</h2>
-					<button class="photo-grid__like" type="button"></button>
-				</figcaption>
-			</figure>
-			<figure class="photo-grid__item">
-				<img class="photo-grid__picture" alt="картинка" src="./images/place_elbrus.png">
-				<figcaption class="photo-grid__item-title ">
-					<h2 class="photo-grid__item-name">Гора Эльбрус</h2>
-					<button class="photo-grid__like" type="button"></button>
-				</figcaption>
+			<!--			<figure class="photo-grid__item">-->
+			<!--				<img class="photo-grid__picture" alt="картинка" src="./images/place_karach-cherck.png">-->
+			<!--				<figcaption class="photo-grid__item-title ">-->
+			<!--					<h2 class="photo-grid__item-name">Карачаевск</h2>-->
+			<!--					<button class="photo-grid__like" type="button"></button>-->
+			<!--				</figcaption>-->
+			<!--			</figure>-->
+			<!--			<figure class="photo-grid__item">-->
+			<!--				<img class="photo-grid__picture" alt="картинка" src="./images/place_elbrus.png">-->
+			<!--				<figcaption class="photo-grid__item-title ">-->
+			<!--					<h2 class="photo-grid__item-name">Гора Эльбрус</h2>-->
+			<!--					<button class="photo-grid__like" type="button"></button>-->
+			<!--				</figcaption>-->
 
-			</figure>
-			<figure class="photo-grid__item">
-				<img class="photo-grid__picture" alt="картинка" src="./images/place_dombay1.png">
-				<figcaption class="photo-grid__item-title ">
-					<h2 class="photo-grid__item-name">Домбай</h2>
-					<button class="photo-grid__like" type="button"></button>
-				</figcaption>
+			<!--			</figure>-->
+			<!--			<figure class="photo-grid__item">-->
+			<!--				<img class="photo-grid__picture" alt="картинка" src="./images/place_dombay1.png">-->
+			<!--				<figcaption class="photo-grid__item-title ">-->
+			<!--					<h2 class="photo-grid__item-name">Домбай</h2>-->
+			<!--					<button class="photo-grid__like" type="button"></button>-->
+			<!--				</figcaption>-->
 
-			</figure>
-			<figure class="photo-grid__item">
-				<img class="photo-grid__picture" alt="картинка" src="./images/place_elbrus.png">
-				<figcaption class="photo-grid__item-title ">
-					<h2 class="photo-grid__item-name">Гора Эльбрус</h2>
-					<button class="photo-grid__like" type="button"></button>
-				</figcaption>
+			<!--			</figure>-->
+			<!--			<figure class="photo-grid__item">-->
+			<!--				<img class="photo-grid__picture" alt="картинка" src="./images/place_elbrus.png">-->
+			<!--				<figcaption class="photo-grid__item-title ">-->
+			<!--					<h2 class="photo-grid__item-name">Гора Эльбрус</h2>-->
+			<!--					<button class="photo-grid__like" type="button"></button>-->
+			<!--				</figcaption>-->
 
-			</figure>
-			<figure class="photo-grid__item">
-				<img class="photo-grid__picture" alt="картинка" src="./images/place_kirill-pershin-1556355-unsplash.png">
-				<figcaption class="photo-grid__item-title ">
-					<h2 class="photo-grid__item-name">Домбай</h2>
-					<button class="photo-grid__like" type="button"></button>
-				</figcaption>
+			<!--			</figure>-->
+			<!--			<figure class="photo-grid__item">-->
+			<!--				<img class="photo-grid__picture" alt="картинка" src="./images/place_kirill-pershin-1556355-unsplash.png">-->
+			<!--				<figcaption class="photo-grid__item-title ">-->
+			<!--					<h2 class="photo-grid__item-name">Домбай</h2>-->
+			<!--					<button class="photo-grid__like" type="button"></button>-->
+			<!--				</figcaption>-->
 
-			</figure>
-			<figure class="photo-grid__item">
-				<img class="photo-grid__picture" alt="картинка" src="./images/place_karach-cherck.png">
-				<figcaption class="photo-grid__item-title ">
-					<h2 class="photo-grid__item-name">Карачаево-Черкесск</h2>
-					<button class="photo-grid__like" type="button"></button>
-				</figcaption>
+			<!--			</figure>-->
+			<!--			<figure class="photo-grid__item">-->
+			<!--				<img class="photo-grid__picture" alt="картинка" src="./images/place_karach-cherck.png">-->
+			<!--				<figcaption class="photo-grid__item-title ">-->
+			<!--					<h2 class="photo-grid__item-name">Карачаево-Черкесск</h2>-->
+			<!--					<button class="photo-grid__like" type="button"></button>-->
+			<!--				</figcaption>-->
 
-			</figure>
+			<!--			</figure>-->
 		</section>
 	</main>
 	<footer class="footer">
@@ -85,9 +86,10 @@
 	<form class="popup__container popup__container_edit" name="editUserProfile">
 		<h2 class="popup__title">Редактировать профиль</h2>
 		<fieldset class="popup__inputs">
-			<input type="text" class="popup__input popup__input_name" maxlength ="50" name="name" placeholder="Жак-Ив Кусто">
+			<input type="text" class="popup__input popup__input_name" maxlength="50" name="name" placeholder="Жак-Ив Кусто">
 
-			<input type="text" class="popup__input popup__input_about" maxlength ="50" name="about" placeholder="Исследователь океана">
+			<input type="text" class="popup__input popup__input_about" maxlength="50" name="about"
+						 placeholder="Исследователь океана">
 			<button type="submit" class="popup__submit">Сохранить</button>
 		</fieldset>
 		<button class="popup__close-button" type="button"></button>
@@ -97,9 +99,10 @@
 	<form class="popup__container popup__container_add-photo" name="addPict">
 		<h2 class="popup__title">Новое место</h2>
 		<fieldset class="popup__inputs">
-			<input type="text" class="popup__input popup__input_title" maxlength ="50" name="title" placeholder="Название">
+			<input type="text" class="popup__input popup__input_title" maxlength="50" name="title" placeholder="Название">
 
-			<input type="text" class="popup__input popup__input_link" maxlength ="100" name="link" placeholder="Ссылка на картинку">
+			<input type="text" class="popup__input popup__input_link" maxlength="100" name="link"
+						 placeholder="Ссылка на картинку">
 			<button type="submit" class="popup__submit">Сохранить</button>
 		</fieldset>
 		<button class="popup__close-button" type="button"></button>
@@ -112,7 +115,17 @@
 		<button class="popup__close-button" type="button"></button>
 	</figure>
 </div>
-<script src="./scripts/scripts.js"></script>
+<template class="template">
+	<figure class="photo-grid__item">
+		<img class="photo-grid__picture" alt="картинка" src="#">
+		<figcaption class="photo-grid__item-title ">
+			<h2 class="photo-grid__item-name"></h2>
+			<button class="photo-grid__like" type="button"></button>
+		</figcaption>
+		<button class="photo-grid__trash" type="button"></button>
+	</figure>
+</template>
+
 </body>
 
 </html>

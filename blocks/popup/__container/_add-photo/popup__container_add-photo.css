@@ -1,3 +1,9 @@
 .popup__container_add-photo {
+width: 430px;
+}
 
+@media screen and (max-width: 500px) {
+    .popup__container_add-photo {
+        width: 240px;
+    }
 }
