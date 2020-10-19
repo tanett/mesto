@@ -71,11 +71,6 @@ const popupShowPict = document.querySelector('.popup_show-pict');
 const photoGridPictures = document.querySelectorAll('.photo-grid__picture');
 let popupFullsizePict = document.querySelector('.popup__fullsize-pict');
 
-//лайк фото
-const photoLikes = document.querySelectorAll('.photo-grid__like');
-
-//корзины
-const trashes = document.querySelectorAll('.photo-grid__trash');
 
 function popupOpenEdit() {
   nameInput.value = profileName.textContent;
