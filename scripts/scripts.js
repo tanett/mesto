@@ -147,9 +147,7 @@ buttonsClosePopup.forEach((buttonClosePopup) => buttonClosePopup.addEventListene
 
 photoGridPictures.forEach((photoGridPict) => photoGridPict.addEventListener('click', popupOpenPict));
 
-// photoLikes.forEach((like) => {
-//   like.addEventListener('click', changeLike)
-// });
+
 
 
 
