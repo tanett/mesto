@@ -31,10 +31,13 @@ const template = document.querySelector('.template');
 
 function getPhotoItems (objWithNameAndLink)  {
   const photoItem = template.content.cloneNode(true);
+  const  photoItemPicture= photoItem.querySelector('.photo-grid__picture');
   photoItem.querySelector('.photo-grid__item-name').innerText = objWithNameAndLink.name;
-  photoItem.querySelector('.photo-grid__picture').src = objWithNameAndLink.link;
+  photoItemPicture.src = objWithNameAndLink.link;
+  photoItemPicture.alt = objWithNameAndLink.name;
   photoItem.querySelector('.photo-grid__like').addEventListener('click', changeLike);
   photoItem.querySelector('.photo-grid__trash').addEventListener('click', removePhotoItem);
+  photoItemPicture.addEventListener('click', popupOpenPict);
   return photoItem;
 }
 
@@ -50,54 +53,54 @@ renederPhotoGrid();
 const buttonOpenPopupEdit = document.querySelector('.profile__edit-button');
 const popupEditUserProfile = document.querySelector('.popup_edit-user-profile');
 const formEdit = document.querySelector('.popup__container_edit');
-let nameInput = document.querySelector('.popup__input_name');
-let aboutInput = document.querySelector('.popup__input_about');
-let profileName = document.querySelector('.profile__name');
-let profileDescr = document.querySelector('.profile__descr');
+const nameInput = document.querySelector('.popup__input_name');
+const aboutInput = document.querySelector('.popup__input_about');
+const profileName = document.querySelector('.profile__name');
+const profileDescr = document.querySelector('.profile__descr');
 
 // для окна добавления фото
 const buttonOpenPopupAdd = document.querySelector('.profile__add-button');
 const popupAddPict = document.querySelector('.popup_add-pict');
 const formAdd = document.querySelector('.popup__container_add-photo');
-let titleInput = document.querySelector('.popup__input_title');
-let linkInput = document.querySelector('.popup__input_link');
+const titleInput = document.querySelector('.popup__input_title');
+const linkInput = document.querySelector('.popup__input_link');
 
 //общие для всех попапов
-const buttonsClosePopup = document.querySelectorAll('.popup__close-button');
+const closePopupButtons = document.querySelectorAll('.popup__close-button');
 const popups = document.querySelectorAll('.popup');
 
 //попап фуллсайз картинки
 const popupShowPict = document.querySelector('.popup_show-pict');
-const photoGridPictures = document.querySelectorAll('.photo-grid__picture');
-let popupFullsizePict = document.querySelector('.popup__fullsize-pict');
+const popupFullsizePict = document.querySelector('.popup__fullsize-pict');
 
+
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
 
 function popupOpenEdit() {
   nameInput.value = profileName.textContent;
   aboutInput.value = profileDescr.textContent;
-  popupEditUserProfile.classList.add('popup_opened');
+  openPopup(popupEditUserProfile);
 }
 
 function popupOpenAdd() {
-  popupAddPict.classList.add('popup_opened');
+  openPopup(popupAddPict);
 }
 
 function popupOpenPict(event) {
   popupFullsizePict.src = event.target.src;
-  popupShowPict.classList.add('popup_opened');
-  console.log(event.target.src);
-  console.log('ok');
+  openPopup(popupShowPict);
 }
-
 
 function popupClose() {
-  popups.forEach(popup => {
-    popup.classList.remove('popup_opened')
-  })
-
+  const openedPopup = document.querySelector('.popup_opened')
+  if (openedPopup) {
+    openedPopup.classList.remove('popup_opened')
+  }
 }
 
-function onMissclickPopup(event) {
+function onOverlayClick(event) {
   if (event.target !== event.currentTarget) {
     return;
   }
@@ -136,11 +139,10 @@ buttonOpenPopupAdd.addEventListener('click', popupOpenAdd);
 formEdit.addEventListener('submit', formSubmitHandlerEditUserProfile);
 formAdd.addEventListener('submit', formSubmitHandlerAddPict);
 
-popups.forEach(popup => popup.addEventListener('click', onMissclickPopup));
+popups.forEach(popup => popup.addEventListener('click', onOverlayClick));
+closePopupButtons.forEach((buttonClosePopup) => buttonClosePopup.addEventListener('click', popupClose));
 
-buttonsClosePopup.forEach((buttonClosePopup) => buttonClosePopup.addEventListener('click', popupClose));
 
-photoGridPictures.forEach((photoGridPict) => photoGridPict.addEventListener('click', popupOpenPict));
 
 
 
