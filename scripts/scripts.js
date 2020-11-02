@@ -100,6 +100,13 @@ function popupClose() {
   }
 }
 
+function escClosePopup(event) {
+  if (event.key ==='Escape' || event.code === 27) {
+    popupClose();
+    console.log('esc press');
+  }
+}
+
 function onOverlayClick(event) {
   if (event.target !== event.currentTarget) {
     return;
@@ -139,7 +146,11 @@ buttonOpenPopupAdd.addEventListener('click', popupOpenAdd);
 formEdit.addEventListener('submit', formSubmitHandlerEditUserProfile);
 formAdd.addEventListener('submit', formSubmitHandlerAddPict);
 
-popups.forEach(popup => popup.addEventListener('click', onOverlayClick));
+popups.forEach((popup) => {
+  popup.addEventListener('click', onOverlayClick);
+  popup.addEventListener('keydown', escClosePopup);
+  console.log('add esc')
+});
 closePopupButtons.forEach((buttonClosePopup) => buttonClosePopup.addEventListener('click', popupClose));
 
 

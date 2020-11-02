@@ -7,6 +7,7 @@
 	<title>Место</title>
 	<link rel="stylesheet" href="./pages/index.css">
 	<script src="./scripts/scripts.js" defer></script>
+
 </head>
 
 <body class="page">
@@ -40,11 +41,11 @@
 	<form class="popup__container popup__container_edit" name="editUserProfile">
 		<h2 class="popup__title">Редактировать профиль</h2>
 		<fieldset class="popup__inputs">
-			<input type="text" class="popup__input popup__input_name" maxlength="50" name="name" placeholder="Жак-Ив Кусто">
-			<span class="popup__error-msg"></span>
-			<input type="text" class="popup__input popup__input_about" maxlength="50" name="about"
+			<input type="text" class="popup__input popup__input_name" minlength="2" maxlength="40" name="name" id="popup__input_name" placeholder="Жак-Ив Кусто" required>
+			<span class="popup__error-msg" id="popup__input_name-error"></span>
+			<input type="text" class="popup__input popup__input_about" minlength="2" maxlength="200" name="about" id="popup__input_about" required
 						 placeholder="Исследователь океана">
-			<span class="popup__error-msg"></span>
+			<span class="popup__error-msg" id="popup__input_about-error"></span>
 			<button type="submit" class="popup__submit">Сохранить</button>
 		</fieldset>
 		<button class="popup__close-button" type="button"></button>
@@ -54,11 +55,11 @@
 	<form class="popup__container popup__container_add-photo" name="addPict">
 		<h2 class="popup__title">Новое место</h2>
 		<fieldset class="popup__inputs">
-			<input type="text" class="popup__input popup__input_title" maxlength="50" name="title" placeholder="Название">
-			<span class="popup__error-msg"></span>
-			<input type="text" class="popup__input popup__input_link" maxlength="100" name="link"
-						 placeholder="Ссылка на картинку">
-			<span class="popup__error-msg"></span>
+			<input type="text" class="popup__input popup__input_title" minlength="2" maxlength="30" name="title" id="popup__input_title" placeholder="Название" required>
+			<span class="popup__error-msg" id="popup__input_title-error"></span>
+			<input type="url" class="popup__input popup__input_link" id="popup__input_link"  name="link"
+						 placeholder="Ссылка на картинку" required>
+			<span class="popup__error-msg" id="popup__input_link-error"></span>
 			<button type="submit" class="popup__submit">Сохранить</button>
 		</fieldset>
 		<button class="popup__close-button" type="button"></button>
@@ -81,7 +82,7 @@
 		<button class="photo-grid__trash" type="button"></button>
 	</figure>
 </template>
-
+<script src="scripts/validate.js"></script>
 </body>
 
 </html>

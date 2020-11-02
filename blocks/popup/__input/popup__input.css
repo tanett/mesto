@@ -21,3 +21,6 @@
 	cursor: auto;
 }
 
+.popup__input:invalid {
+	border-bottom: 1px solid rgba(255,0,0, 0.2);
+}
