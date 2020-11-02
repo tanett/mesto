@@ -44,8 +44,7 @@ function getPhotoItems (objWithNameAndLink)  {
 function renederPhotoGrid ()  {
   const photos = initialCards.map((element) => {return getPhotoItems(element)});
   photoGrid.append(...photos);
-  console.log(photos);
-}
+  }
 
 renederPhotoGrid();
 
@@ -72,10 +71,12 @@ const popups = document.querySelectorAll('.popup');
 //попап фуллсайз картинки
 const popupShowPict = document.querySelector('.popup_show-pict');
 const popupFullsizePict = document.querySelector('.popup__fullsize-pict');
-
+const popupTitlePict = document.querySelector('.popup__pict-title');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.body.addEventListener('keydown', escClosePopup);
+
 }
 
 function popupOpenEdit() {
@@ -84,26 +85,25 @@ function popupOpenEdit() {
   openPopup(popupEditUserProfile);
 }
 
-function popupOpenAdd() {
-  openPopup(popupAddPict);
-}
 
 function popupOpenPict(event) {
   popupFullsizePict.src = event.target.src;
+  popupTitlePict.textContent = event.target.alt;
   openPopup(popupShowPict);
 }
 
 function popupClose() {
   const openedPopup = document.querySelector('.popup_opened')
+  document.body.removeEventListener('keydown', escClosePopup);
   if (openedPopup) {
     openedPopup.classList.remove('popup_opened')
   }
+
 }
 
 function escClosePopup(event) {
   if (event.key ==='Escape' || event.code === 27) {
     popupClose();
-    console.log('esc press');
   }
 }
 
@@ -141,16 +141,15 @@ function removePhotoItem (event) {
 
 
 buttonOpenPopupEdit.addEventListener('click', popupOpenEdit);
-buttonOpenPopupAdd.addEventListener('click', popupOpenAdd);
+buttonOpenPopupAdd.addEventListener('click', () =>openPopup(popupAddPict));
 
 formEdit.addEventListener('submit', formSubmitHandlerEditUserProfile);
 formAdd.addEventListener('submit', formSubmitHandlerAddPict);
 
 popups.forEach((popup) => {
   popup.addEventListener('click', onOverlayClick);
-  popup.addEventListener('keydown', escClosePopup);
-  console.log('add esc')
 });
+
 closePopupButtons.forEach((buttonClosePopup) => buttonClosePopup.addEventListener('click', popupClose));
 
 
