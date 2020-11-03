@@ -92,18 +92,16 @@ function popupOpenPict(event) {
   openPopup(popupShowPict);
 }
 
-function popupClose() {
-  const openedPopup = document.querySelector('.popup_opened')
+function popupClose(openedPopup) {
+  // const openedPopup = document.querySelector('.popup_opened')
   document.body.removeEventListener('keydown', escClosePopup);
-  if (openedPopup) {
-    openedPopup.classList.remove('popup_opened')
-  }
+    openedPopup.classList.remove('popup_opened');
 
 }
 
 function escClosePopup(event) {
-  if (event.key ==='Escape' || event.code === 27) {
-    popupClose();
+  if (event.key ==='Escape') {
+    popupClose(document.querySelector('.popup_opened'));
   }
 }
 
@@ -111,21 +109,21 @@ function onOverlayClick(event) {
   if (event.target !== event.currentTarget) {
     return;
   }
-  popupClose();
+  popupClose(event.target);
 }
 
-function formSubmitHandlerEditUserProfile(evt) {
-  evt.preventDefault();
+function formSubmitHandlerEditUserProfile(event) {
+  event.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescr.textContent = aboutInput.value;
-  popupClose();
+  popupClose(event.target.closest('.popup_opened'));
 }
 
-function formSubmitHandlerAddPict(evt) {
-  evt.preventDefault();
+function formSubmitHandlerAddPict(event) {
+  event.preventDefault();
   const nItem = getPhotoItems({name: titleInput.value, link : linkInput.value});
   photoGrid.prepend(nItem);
-  popupClose();
+  popupClose(event.target.closest('.popup_opened'));
   titleInput.value = '';
   linkInput.value = '';
 }
@@ -150,7 +148,7 @@ popups.forEach((popup) => {
   popup.addEventListener('click', onOverlayClick);
 });
 
-closePopupButtons.forEach((buttonClosePopup) => buttonClosePopup.addEventListener('click', popupClose));
+closePopupButtons.forEach((buttonClosePopup) => buttonClosePopup.addEventListener('click', (event) =>popupClose(event.target.closest('.popup_opened'))));
 
 
 
