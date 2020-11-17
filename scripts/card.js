@@ -28,9 +28,10 @@ export  class Card {
         this._cardElement = this._getTemplateCard();
         this._likeBtn = this._cardElement.querySelector('.photo-grid__like');
         this._trash = this._cardElement.querySelector('.photo-grid__trash');
+        this._photoGridPict  = this._cardElement.querySelector('.photo-grid__picture')
         this._setEventListener();
-        this._cardElement.querySelector('.photo-grid__picture').src = this._pictLink;
-        this._cardElement.querySelector('.photo-grid__picture').alt = this._name;
+        this._photoGridPict.src = this._pictLink;
+        this._photoGridPict.alt = this._name;
         this._cardElement.querySelector('.photo-grid__item-name').innerText = this._name;
 
         return this._cardElement;

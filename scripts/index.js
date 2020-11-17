@@ -17,11 +17,9 @@ import {initialCards,config, photoGrid,  buttonOpenPopupEdit , popupEditUserProf
    photoGrid.append(cardHtmlElement);
  })
 
-// открытие попапа и подключение валидации
+// открытие попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  const validator = new FormValidator(config, popup.querySelector('.popup__container'));
-  validator.enableValidation(popup.querySelector('.popup__container'));
   document.body.addEventListener('keydown', escClosePopup);
 
 }
@@ -65,16 +63,33 @@ function formSubmitHandlerEditUserProfile(event) {
   profileDescr.textContent = aboutInput.value;
   popupClose(event.target.closest('.popup_opened'));
 }
+
+//функция получения новой фотокарточки из попапа добавления фото
+function getNewCard(data) {
+  const Item = new Card(data, '.template');
+  const newItem = Item.generateCard();
+  newItem.querySelector('.photo-grid__picture').addEventListener('click', popupOpenPict);
+  return newItem;
+}
+
+
 // обработчик добавления картинки
 function formSubmitHandlerAddPict(event) {
   event.preventDefault();
-  const Item = new Card({name: titleInput.value, link : linkInput.value}, '.template');
-  const newItem = Item.generateCard();
-  photoGrid.prepend(newItem);
+
+  photoGrid.prepend(getNewCard({name: titleInput.value, link : linkInput.value}));
   popupClose(event.target.closest('.popup_opened'));
   titleInput.value = '';
   linkInput.value = '';
 }
+
+//подключение валидации
+Array.from(document.querySelectorAll('form')).forEach(form =>{
+  const validator = new FormValidator(config, form);
+  validator.enableValidation();
+})
+
+
 // установка слушателей
 buttonOpenPopupEdit.addEventListener('click', popupOpenEdit);
 buttonOpenPopupAdd.addEventListener('click', () =>openPopup(popupAddPict));
