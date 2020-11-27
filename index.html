@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Место</title>
-	<link rel="stylesheet" href="./pages/index.css">
+	<link rel="stylesheet" href="index.css">
 
 
 </head>
@@ -55,7 +55,7 @@
 	<form class="popup__container popup__container_add-photo" name="addPict">
 		<h2 class="popup__title">Новое место</h2>
 		<fieldset class="popup__inputs">
-			<input type="text" class="popup__input popup__input_title" minlength="2" maxlength="30" name="title" id="popup__input_title" placeholder="Название" required>
+			<input type="text" class="popup__input popup__input_title" minlength="2" maxlength="30" name="name" id="popup__input_title" placeholder="Название" required>
 			<span class="popup__error-msg" id="popup__input_title-error"></span>
 			<input type="url" class="popup__input popup__input_link" id="popup__input_link"  name="link"
 						 placeholder="Ссылка на картинку" required>
@@ -82,10 +82,10 @@
 		<button class="photo-grid__trash" type="button"></button>
 	</figure>
 </template>
-<script src="scripts/index.js" type="module"></script>
-<script type="module" src="./scripts/utils.js"></script>
-<script type="module" src="./scripts/card.js"></script>
-<script type="module" src="./scripts/FormValidator.js"></script>
+<script src="pages/index.js" type="module"></script>
+<script type="module" src="utils/utils.js"></script>
+<script type="module" src="components/card.js"></script>
+<script type="module" src="components/FormValidator.js"></script>
 
 </body>
 

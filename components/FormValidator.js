@@ -1,4 +1,4 @@
-import {config} from "./utils.js";
+import {config} from "../utils/utils.js";
 
 export class FormValidator {
     constructor(config, formElement) {

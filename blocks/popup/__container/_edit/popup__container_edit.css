@@ -1,0 +1,9 @@
+.popup__container_edit {
+    width: 430px;
+}
+
+@media screen and (max-width: 500px) {
+    .popup__container_edit {
+        width: 240px;
+    }
+}
