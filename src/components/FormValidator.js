@@ -30,10 +30,10 @@ export class FormValidator {
 
     _changeButtonState() {
         if (this._formElement.checkValidity()) {
-            this._submitButton.classList.remove(config.inactiveButtonClass);
+            this._submitButton.classList.remove(config.unactiveButtonClass);
             this._submitButton.disabled = false;
         } else {
-            this._submitButton.classList.add(config.inactiveButtonClass);
+            this._submitButton.classList.add(config.unactiveButtonClass);
             this._submitButton.disabled = true;
         }
     }
@@ -41,11 +41,14 @@ export class FormValidator {
     _setEventListener() {
 
         this._inputsList.forEach((input) => {
-            input.addEventListener('input', () => {
-                this._inputValidation(input);
-                this._changeButtonState();
-            })
             this._changeButtonState();
+            input.addEventListener('input', () => {
+
+                this._changeButtonState();
+                this._inputValidation(input);
+
+            })
+
         })
 
     }

@@ -29,11 +29,12 @@ const config = {
     formSelector: '.popup__container',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__submit',
-    inactiveButtonClass: 'popup__submit_disactive',
-    errorClass: 'popup__input_invalid'
+    unactiveButtonClass: 'popup__submit_disactive',
+    errorClass: 'popup__input_invalid',
+    photoGrid: '.photo-grid'
 }
 
-const photoGrid = document.querySelector('.photo-grid');
+const photoGridElement = document.querySelector('.photo-grid');
 
 // для попапа редактирования профиля
 const buttonOpenPopupEdit = document.querySelector('.profile__edit-button');
@@ -60,8 +61,8 @@ const popupShowPict = document.querySelector('.popup_show-pict');
 const popupFullsizePict = document.querySelector('.popup__fullsize-pict');
 const popupTitlePict = document.querySelector('.popup__pict-title');
 
-export {initialCards, config,photoGrid, buttonOpenPopupEdit , popupEditUserProfile, formEdit,
+export {initialCards, config,photoGridElement, buttonOpenPopupEdit , popupEditUserProfile,
     nameInput, aboutInput,profileName,profileDescr,
-    buttonOpenPopupAdd, popupShowPict, popupAddPict, formAdd,titleInput, linkInput,
+    buttonOpenPopupAdd, popupShowPict, popupAddPict, formAdd,formEdit,titleInput, linkInput,
     closePopupButtons, popups,
     popupFullsizePict, popupTitlePict};

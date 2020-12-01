@@ -1,5 +1,5 @@
 import '../index.css';
-import {Card} from "../components/card.js";
+import {Card} from "../components/Card.js";
 import {FormValidator} from "../components/FormValidator.js";
 import {Section} from "../components/Section.js";
 import {UserInfo} from "../components/UserInfo.js";
@@ -7,26 +7,33 @@ import {PopupWithImage} from "../components/PopupWithImage.js";
 import {PopupWithForm} from "../components/PopupWithForm.js";
 
 //импорт стартового массива и переменных
-import {initialCards,config,   buttonOpenPopupEdit ,profileName,profileDescr,
-    buttonOpenPopupAdd} from "../utils/utils.js";
+import {
+    initialCards, config, buttonOpenPopupEdit, profileName, profileDescr,
+    nameInput, aboutInput, formEdit,
+    buttonOpenPopupAdd, formAdd
+} from "../utils/utils.js";
 
 
+//функция создания карточки
+function createCard(cardData,handleCardClick, templateSelector) {
+    const cardItem = new Card(cardData,handleCardClick, templateSelector);
+    return cardItem.generateCard();
 
+}
 // рендеринг первоначального массива фото
 const renderInitialsCard = new Section({items :initialCards,
     renderer:(item) => {
-        const cardItem = new Card(item, cardClick, '.template');
-        const cardHtmlElement = cardItem.generateCard();
-        renderInitialsCard.addItem(cardHtmlElement);
 
-    } }, '.photo-grid');
+        renderInitialsCard.addItem(createCard(item, handleCardClick, '.template'));
+
+    } }, config.photoGrid);
 
 //Вызов метода отображения стартового массива
 renderInitialsCard.rendererAllElements();
 
 // функция открытия попапа просмотра  при клике на карточку
-function cardClick() {
-    PopupShowPict.open(event);
+function handleCardClick() {
+    popupShowPict.open(event);
 }
 
 // обработчик добавления картинки
@@ -34,53 +41,54 @@ function formSubmitHandlerAddPict(event) {
     event.preventDefault();
     const renderCardItem = new Section({
         renderer: () => {
-            const cardItem = new Card(PopupAddImage._getInputValues(), cardClick, '.template');
-            return cardItem.generateCard();
+            return createCard(popupAddImage._getInputValues(), handleCardClick, '.template');
+
         }
-    }, '.photo-grid');
+    }, config.photoGrid);
     renderCardItem.addItem(renderCardItem._renderer());
-    PopupAddImage.close.bind(PopupAddImage)();
+    popupAddImage.close.bind(popupAddImage)();
 }
 
 //попап добавления картинки
-const PopupAddImage = new PopupWithForm(formSubmitHandlerAddPict,'.popup_add-pict');
-PopupAddImage.setEventListeners();
+const popupAddImage = new PopupWithForm(formSubmitHandlerAddPict,'.popup_add-pict');
+popupAddImage.setEventListeners();
 
 //вызов класса с инфо юзера
-const UserInf = new UserInfo('.profile__name','.profile__descr');
+const userInf = new UserInfo('.profile__name','.profile__descr');
 
 // обработчик попапа редактирования инфо
 function formSubmitHandlerEditUserProfile(event) {
     event.preventDefault();
-    const inputValue = PopupEditInfo._getInputValues.bind(PopupEditInfo)();
-    UserInf.setUserInfo(inputValue);
-    PopupEditInfo.close();
+    const inputValue = popupEditInfo._getInputValues.bind(popupEditInfo)();
+    userInf.setUserInfo(inputValue);
+    popupEditInfo.close();
 }
 //попап редактирования инфо
-const PopupEditInfo = new PopupWithForm(formSubmitHandlerEditUserProfile,'.popup_edit-user-profile');
-PopupEditInfo.setEventListeners();
+const popupEditInfo = new PopupWithForm(formSubmitHandlerEditUserProfile,'.popup_edit-user-profile');
+popupEditInfo.setEventListeners();
 
 //попап просмотра картинки
-const PopupShowPict = new PopupWithImage('.popup_show-pict');
-PopupShowPict.setEventListeners();
+const popupShowPict = new PopupWithImage('.popup_show-pict');
+popupShowPict.setEventListeners();
 
 
 //подключение валидации
-Array.from(document.querySelectorAll('form')).forEach(form =>{
-    const validator = new FormValidator(config, form);
-    validator.enableValidation();
-})
 
+const validatorPopupEditInfo = new FormValidator(config, formEdit);
+validatorPopupEditInfo.enableValidation.bind(validatorPopupEditInfo)();
+
+const validatorPopupAddImage = new FormValidator(config, formAdd);
+validatorPopupAddImage.enableValidation.bind(validatorPopupAddImage)();
 
 
 // установка слушателей на кнопки открытия попапов
 buttonOpenPopupEdit.addEventListener('click', ()=>{
-const userData = UserInf.getUserInfo();
-    profileName.textContent = userData.name;
-    profileDescr.textContent = userData.about;
-    PopupEditInfo.open();
+const userData = userInf.getUserInfo();
+    nameInput.value = userData.name;
+    aboutInput.value = userData.about;
+    popupEditInfo.open();
 });
-buttonOpenPopupAdd.addEventListener('click', ()=>PopupAddImage.open());
+buttonOpenPopupAdd.addEventListener('click', ()=>popupAddImage.open());
 
 
 

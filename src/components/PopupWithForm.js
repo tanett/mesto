@@ -5,7 +5,7 @@ export class PopupWithForm extends Popup {
     constructor(handlerSubmitForm,popupSelector ) {
         super(popupSelector);
         this._handlerSubmitForm = handlerSubmitForm;
-        this._listInputs = this._popap.querySelectorAll('.popup__input');
+        this._listInputs = this._popup.querySelectorAll('.popup__input');
 
     }
     _getInputValues(){
@@ -17,13 +17,14 @@ export class PopupWithForm extends Popup {
     }
     close(){
         super.close();
-        titleInput.value = '';
-        linkInput.value = '';
+        this._popup.querySelector('form').reset();
+        // titleInput.value = '';
+        // linkInput.value = '';
 
     }
     setEventListeners(){
         super.setEventListeners();
-        this._popap.addEventListener('submit', this._handlerSubmitForm);
+        this._popup.addEventListener('submit', this._handlerSubmitForm);
 
     }
 }
