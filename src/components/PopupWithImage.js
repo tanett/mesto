@@ -7,9 +7,6 @@ export class PopupWithImage extends Popup {
         fullsizePict.src = event.target.src;
         this._popup.querySelector('.popup__pict-title').textContent = event.target.alt;
         fullsizePict.alt = event.target.alt;
-
-        // popupFullsizePict.src = event.target.src;
-        // popupTitlePict.textContent = event.target.alt;
         super.open();
     }
 }

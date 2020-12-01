@@ -1,5 +1,5 @@
 import {Popup} from "./Popap.js";
-import {titleInput,linkInput} from '../utils/utils.js';
+
 
 export class PopupWithForm extends Popup {
     constructor(handlerSubmitForm,popupSelector ) {
@@ -15,16 +15,25 @@ export class PopupWithForm extends Popup {
 
         return this._inputValues;
     }
+
+    open(){
+        this._submitBtn.classList.add('popup__submit_disactive');
+        this._submitBtn.disabled = true;
+        super.open();
+    }
+
     close(){
         super.close();
         this._popup.querySelector('form').reset();
-        // titleInput.value = '';
-        // linkInput.value = '';
+
 
     }
     setEventListeners(){
         super.setEventListeners();
-        this._popup.addEventListener('submit', this._handlerSubmitForm);
+        this._popup.addEventListener('submit',(event)=>{
+            event.preventDefault();
+            this._handlerSubmitForm(this._getInputValues());
+        } );
 
     }
 }

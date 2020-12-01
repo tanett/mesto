@@ -8,7 +8,7 @@ import {PopupWithForm} from "../components/PopupWithForm.js";
 
 //импорт стартового массива и переменных
 import {
-    initialCards, config, buttonOpenPopupEdit, profileName, profileDescr,
+    initialCards, config, buttonOpenPopupEdit,
     nameInput, aboutInput, formEdit,
     buttonOpenPopupAdd, formAdd
 } from "../utils/utils.js";
@@ -37,11 +37,11 @@ function handleCardClick() {
 }
 
 // обработчик добавления картинки
-function formSubmitHandlerAddPict(event) {
-    event.preventDefault();
+function formSubmitHandlerAddPict(valuesFromInput) {
+
     const renderCardItem = new Section({
         renderer: () => {
-            return createCard(popupAddImage._getInputValues(), handleCardClick, '.template');
+            return createCard(valuesFromInput, handleCardClick, '.template');
 
         }
     }, config.photoGrid);
@@ -57,10 +57,10 @@ popupAddImage.setEventListeners();
 const userInf = new UserInfo('.profile__name','.profile__descr');
 
 // обработчик попапа редактирования инфо
-function formSubmitHandlerEditUserProfile(event) {
-    event.preventDefault();
-    const inputValue = popupEditInfo._getInputValues.bind(popupEditInfo)();
-    userInf.setUserInfo(inputValue);
+function formSubmitHandlerEditUserProfile(valuesFromInput) {
+
+    // const inputValue = popupEditInfo._getInputValues.bind(popupEditInfo)();
+    userInf.setUserInfo(valuesFromInput);
     popupEditInfo.close();
 }
 //попап редактирования инфо

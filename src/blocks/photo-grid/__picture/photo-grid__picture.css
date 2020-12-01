@@ -4,6 +4,7 @@
 	width: 282px;
 	height: 282px;
 	object-position: center;
+	object-fit: cover;
 	transition: .5s ease-in-out;
 
 }

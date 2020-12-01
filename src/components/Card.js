@@ -3,8 +3,8 @@ export  class Card {
         this._templateSelector = templateSelector;
         this._name = cardData.name;
         this._pictLink = cardData.link;
-
         this._handleCardClick = handleCardClick;
+
     };
 
     _getTemplateCard () {
