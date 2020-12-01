@@ -1,22 +1,22 @@
-import {config} from "../utils/utils.js";
+// import {config} from "../utils/utils.js";
 
 export class FormValidator {
     constructor(config, formElement) {
         this._formElement = formElement;
-
-        this._inputsList = Array.from(this._formElement.querySelectorAll(config.inputSelector));
-        this._submitButton = this._formElement.querySelector(config.submitButtonSelector);
+        this.config = config;
+        this._inputsList = Array.from(this._formElement.querySelectorAll(this.config.inputSelector));
+        this._submitButton = this._formElement.querySelector(this.config.submitButtonSelector);
     };
     _showError(input) {
         this._errorElement = this._formElement.querySelector(`#${input.id}-error`);
         this._errorElement.textContent = input.validationMessage;
-        input.classList.add(config.errorClass);
+        input.classList.add(this.config.errorClass);
     }
 
     _hideError(input) {
         this._errorElement = this._formElement.querySelector(`#${input.id}-error`);
          this._errorElement.textContent = '';
-        input.classList.remove(config.errorClass);
+        input.classList.remove(this.config.errorClass);
     }
 
     _inputValidation(input) {
@@ -30,10 +30,10 @@ export class FormValidator {
 
     _changeButtonState() {
         if (this._formElement.checkValidity()) {
-            this._submitButton.classList.remove(config.unactiveButtonClass);
+            this._submitButton.classList.remove(this.config.unactiveButtonClass);
             this._submitButton.disabled = false;
         } else {
-            this._submitButton.classList.add(config.unactiveButtonClass);
+            this._submitButton.classList.add(this.config.unactiveButtonClass);
             this._submitButton.disabled = true;
         }
     }

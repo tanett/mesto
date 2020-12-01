@@ -6,7 +6,7 @@ export class PopupWithForm extends Popup {
         super(popupSelector);
         this._handlerSubmitForm = handlerSubmitForm;
         this._listInputs = this._popup.querySelectorAll('.popup__input');
-
+        this._errMsg = this._popup.querySelector('.popup__error-msg');
     }
     _getInputValues(){
 
@@ -17,6 +17,7 @@ export class PopupWithForm extends Popup {
     }
 
     open(){
+
         this._submitBtn.classList.add('popup__submit_disactive');
         this._submitBtn.disabled = true;
         super.open();
@@ -25,7 +26,8 @@ export class PopupWithForm extends Popup {
     close(){
         super.close();
         this._popup.querySelector('form').reset();
-
+        this._errMsg.textContent = '';
+        this._listInputs.forEach((input) =>input.classList.remove('popup__input_invalid'));
 
     }
     setEventListeners(){
