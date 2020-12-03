@@ -8,9 +8,11 @@ import {PopupWithForm} from "../components/PopupWithForm.js";
 
 //импорт стартового массива и переменных
 import {
-    initialCards, config, buttonOpenPopupEdit,
-    nameInput, aboutInput, formEdit,
-    buttonOpenPopupAdd, formAdd
+    initialCards, config,template, buttonOpenPopupEdit,popupAddPict,profileName,profileDescr,
+    nameInput, aboutInput, formEdit,popupEditUserProfile,
+    popupShowPict, buttonOpenPopupAdd, formAdd,photoGridElement,
+    profileNameSelector,profileDescrSelector,popupAddPictSelector,
+    popupEditUserProfileSelector,popupShowPictSelector
 } from "../utils/utils.js";
 
 
@@ -20,70 +22,88 @@ function createCard(cardData,handleCardClick, templateSelector) {
     return cardItem.generateCard();
 
 }
+
+//функция начльного рендеринга для sectionInitialCards
+function renderStartCard(item) {
+    this.addItem(createCard(item, handleCardClick, template));
+}
+
+//создание экземпляра  класса Section  для начального рендеринга карточек
+const sectionInitialCards = new Section({items:initialCards,renderer: renderStartCard},config.photoGrid);
+
+
 // рендеринг первоначального массива фото
-const renderInitialsCard = new Section({items :initialCards,
-    renderer:(item) => {
-
-        renderInitialsCard.addItem(createCard(item, handleCardClick, '.template'));
-
-    } }, config.photoGrid);
+// const cardList = new Section({items :initialCards,
+//     renderer:(item) => {
+//         cardList.addItem(createCard(item, handleCardClick, template));
+//
+//     } }, config.photoGrid);
 
 //Вызов метода отображения стартового массива
-renderInitialsCard.rendererAllElements();
+sectionInitialCards.rendererAllElements();
+
+//вызов класса с инфо юзера
+const userInfo = new UserInfo(profileNameSelector,profileDescrSelector);
+
+// функция renderer для вызова в классе sectionCardRender
+function renderForCard(data, handleCardClick, template) {
+    return createCard(data, handleCardClick, template);
+}
+// создание экземпляра класс Section для рендеринга добавления карточки
+const sectionCardRender = new Section({ renderer: renderForCard}, config.photoGrid);
+
+
 
 // функция открытия попапа просмотра  при клике на карточку
 function handleCardClick() {
-    popupShowPict.open(event);
+    popupShowImage.open(event);
 }
 
-// обработчик добавления картинки
-function formSubmitHandlerAddPict(valuesFromInput) {
+// обработчик добавления картинки для слушателя кнопки сабмит попапа добавления картинки
+function formSubmitHandlerAddPict(data) {
+    // const renderCardItem = new Section({
+    //     renderer: () => {
+    //         return createCard(valuesFromInput, handleCardClick, template);
+    //
+    //     }
+    // }, config.photoGrid);
 
-    const renderCardItem = new Section({
-        renderer: () => {
-            return createCard(valuesFromInput, handleCardClick, '.template');
-
-        }
-    }, config.photoGrid);
-    renderCardItem.addItem(renderCardItem._renderer());
-    popupAddImage.close.bind(popupAddImage)();
+    sectionCardRender.addItem(renderForCard(data, handleCardClick, template));
+    // popupAddImage.close.bind(popupAddImage)();
+    popupAddImage.close();
 }
 
-//попап добавления картинки
-const popupAddImage = new PopupWithForm(formSubmitHandlerAddPict,'.popup_add-pict');
+//попап добавления картинки - экземпляр класса PopupWithForm
+const popupAddImage = new PopupWithForm(formSubmitHandlerAddPict,popupAddPictSelector);
 popupAddImage.setEventListeners();
 
-//вызов класса с инфо юзера
-const userInf = new UserInfo('.profile__name','.profile__descr');
-
-// обработчик попапа редактирования инфо
+// обработчик попапа редактирования инфо для слушателя кнопки сабмита попапа редактирования инфо
 function formSubmitHandlerEditUserProfile(valuesFromInput) {
-
-    // const inputValue = popupEditInfo._getInputValues.bind(popupEditInfo)();
-    userInf.setUserInfo(valuesFromInput);
+     userInfo.setUserInfo(valuesFromInput);
     popupEditInfo.close();
 }
-//попап редактирования инфо
-const popupEditInfo = new PopupWithForm(formSubmitHandlerEditUserProfile,'.popup_edit-user-profile');
+
+//попап редактирования инфо - экземпляр класса PopupWithForm
+const popupEditInfo = new PopupWithForm(formSubmitHandlerEditUserProfile,popupEditUserProfileSelector);
 popupEditInfo.setEventListeners();
 
-//попап просмотра картинки
-const popupShowPict = new PopupWithImage('.popup_show-pict');
-popupShowPict.setEventListeners();
+//попап просмотра картинки - экземпляр класса PopupWithImage
+const popupShowImage = new PopupWithImage(popupShowPictSelector);
+popupShowImage.setEventListeners();
 
 
 //подключение валидации
-
+//для попапа редактирования
 const validatorPopupEditInfo = new FormValidator(config, formEdit);
 validatorPopupEditInfo.enableValidation.bind(validatorPopupEditInfo)();
-
+//для попапа добавления
 const validatorPopupAddImage = new FormValidator(config, formAdd);
 validatorPopupAddImage.enableValidation.bind(validatorPopupAddImage)();
 
 
 // установка слушателей на кнопки открытия попапов
 buttonOpenPopupEdit.addEventListener('click', ()=>{
-const userData = userInf.getUserInfo();
+const userData = userInfo.getUserInfo();
     nameInput.value = userData.name;
     aboutInput.value = userData.about;
     popupEditInfo.open();

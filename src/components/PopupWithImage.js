@@ -1,5 +1,5 @@
-import {Popup} from "./Popap.js";
-// import {popupFullsizePict, popupTitlePict} from "../utils/utils.js";
+import {Popup} from "./Popup.js";
+
 export class PopupWithImage extends Popup {
 
     open(event) {
