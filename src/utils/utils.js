@@ -30,7 +30,9 @@ const config = {
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__submit',
     unactiveButtonClass: 'popup__submit_disactive',
-    errorClass: 'popup__input_invalid',
+    errorInputClass: 'popup__input_invalid',
+    errorMssgInactivClass: 'popup__error-msg_inactive',
+    errorMssgClass: 'popup__error-msg',
     photoGrid: '.photo-grid'
 }
 

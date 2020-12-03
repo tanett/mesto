@@ -1,4 +1,4 @@
-// import {config} from "../utils/utils.js";
+
 
 export class FormValidator {
     constructor(config, formElement) {
@@ -7,21 +7,26 @@ export class FormValidator {
         this._inputsList = Array.from(this._formElement.querySelectorAll(this.config.inputSelector));
         this._submitButton = this._formElement.querySelector(this.config.submitButtonSelector);
     };
+
     _showError(input) {
         this._errorElement = this._formElement.querySelector(`#${input.id}-error`);
         this._errorElement.textContent = input.validationMessage;
-        input.classList.add(this.config.errorClass);
+        this._errorElement.classList.remove(this.config.errorMssgInactivClass);
+        input.classList.add(this.config.errorInputClass);
     }
 
     _hideError(input) {
+
         this._errorElement = this._formElement.querySelector(`#${input.id}-error`);
-         this._errorElement.textContent = '';
-        input.classList.remove(this.config.errorClass);
+        this._errorElement.textContent = '';
+        this._errorElement.classList.add(this.config.errorMssgInactivClass);
+        input.classList.remove(this.config.errorInputClass);
     }
 
     _inputValidation(input) {
         if (input.checkValidity()) {
             this._hideError(input);
+
         } else {
             this._showError(input);
         }
@@ -38,12 +43,12 @@ export class FormValidator {
         }
     }
 
+
     _setEventListener() {
 
         this._inputsList.forEach((input) => {
             this._changeButtonState();
             input.addEventListener('input', () => {
-
                 this._changeButtonState();
                 this._inputValidation(input);
 
@@ -53,11 +58,20 @@ export class FormValidator {
 
     }
 
+    clearError() {
+
+        this._inputsList.forEach((input) => {
+            this._hideError(input);
+            this._changeButtonState();
+        })
+
+    }
+
     enableValidation() {
         this._formElement.addEventListener('submit', (evt) => {
-                evt.preventDefault();
-            });
+            evt.preventDefault();
+        });
         this._setEventListener();
-        }
+    }
 
 }

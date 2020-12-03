@@ -32,13 +32,6 @@ function renderStartCard(item) {
 const sectionInitialCards = new Section({items:initialCards,renderer: renderStartCard},config.photoGrid);
 
 
-// рендеринг первоначального массива фото
-// const cardList = new Section({items :initialCards,
-//     renderer:(item) => {
-//         cardList.addItem(createCard(item, handleCardClick, template));
-//
-//     } }, config.photoGrid);
-
 //Вызов метода отображения стартового массива
 sectionInitialCards.rendererAllElements();
 
@@ -70,7 +63,7 @@ function formSubmitHandlerAddPict(data) {
 
     sectionCardRender.addItem(renderForCard(data, handleCardClick, template));
     // popupAddImage.close.bind(popupAddImage)();
-    popupAddImage.close();
+    popupAddImage.close.bind(popupAddImage)();
 }
 
 //попап добавления картинки - экземпляр класса PopupWithForm
@@ -80,7 +73,7 @@ popupAddImage.setEventListeners();
 // обработчик попапа редактирования инфо для слушателя кнопки сабмита попапа редактирования инфо
 function formSubmitHandlerEditUserProfile(valuesFromInput) {
      userInfo.setUserInfo(valuesFromInput);
-    popupEditInfo.close();
+    popupEditInfo.close.bind(popupEditInfo)();
 }
 
 //попап редактирования инфо - экземпляр класса PopupWithForm
@@ -95,10 +88,11 @@ popupShowImage.setEventListeners();
 //подключение валидации
 //для попапа редактирования
 const validatorPopupEditInfo = new FormValidator(config, formEdit);
-validatorPopupEditInfo.enableValidation.bind(validatorPopupEditInfo)();
+validatorPopupEditInfo.enableValidation();
+
 //для попапа добавления
 const validatorPopupAddImage = new FormValidator(config, formAdd);
-validatorPopupAddImage.enableValidation.bind(validatorPopupAddImage)();
+validatorPopupAddImage.enableValidation();
 
 
 // установка слушателей на кнопки открытия попапов
@@ -108,7 +102,11 @@ const userData = userInfo.getUserInfo();
     aboutInput.value = userData.about;
     popupEditInfo.open();
 });
-buttonOpenPopupAdd.addEventListener('click', ()=>popupAddImage.open());
+buttonOpenPopupAdd.addEventListener('click', ()=>{
+    validatorPopupAddImage.clearError();
+    popupAddImage.open();
+
+});
 
 
 

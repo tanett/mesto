@@ -6,7 +6,7 @@ export class PopupWithForm extends Popup {
         super(popupSelector);
         this._handlerSubmitForm = handlerSubmitForm;
         this._listInputs = this._popup.querySelectorAll('.popup__input');
-        this._errMsg = this._popup.querySelector('.popup__error-msg');
+        this._form = this._popup.querySelector('form');
     }
     _getInputValues(){
 
@@ -16,25 +16,23 @@ export class PopupWithForm extends Popup {
         return this._inputValues;
     }
 
-    open(){
+    // open(){
+    //
+    //     this._submitBtn.classList.add('popup__submit_disactive');
+    //     this._submitBtn.disabled = true;
+    //     super.open();
+    // }
 
-        this._submitBtn.classList.add('popup__submit_disactive');
-        this._submitBtn.disabled = true;
-        super.open();
-    }
+
 
     close(){
         super.close();
-        this._popup.querySelector('form').reset();
-        this._errMsg.textContent = '';
-        this._listInputs.forEach((input) =>input.classList.remove('popup__input_invalid'));
-
+        this._form.reset();
     }
     setEventListeners(){
         super.setEventListeners();
         this._popup.addEventListener('submit',(event)=>{
             event.preventDefault();
-            console.log(this._getInputValues());
             this._handlerSubmitForm(this._getInputValues());
         } );
 
