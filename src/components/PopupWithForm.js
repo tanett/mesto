@@ -16,15 +16,6 @@ export class PopupWithForm extends Popup {
         return this._inputValues;
     }
 
-    // open(){
-    //
-    //     this._submitBtn.classList.add('popup__submit_disactive');
-    //     this._submitBtn.disabled = true;
-    //     super.open();
-    // }
-
-
-
     close(){
         super.close();
         this._form.reset();
