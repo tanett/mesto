@@ -36,7 +36,13 @@ const config = {
     photoGrid: '.photo-grid'
 }
 
-
+const optionsApi = {
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-19',
+    headers: {
+        authorization: '47b6d590-a975-406b-afdb-480f171a6854',
+        "Content-Type": 'application/json'
+    }
+}
 
 const template = '.template';
 const profileNameSelector = '.profile__name';
@@ -50,14 +56,21 @@ const formEdit = document.querySelector('.popup__container_edit');
 const nameInput = document.querySelector('.popup__input_name');
 const aboutInput = document.querySelector('.popup__input_about');
 
+//для попапа редактирования автарки
+const popupEditAvatarSelector ='.popup_edit-avatar';
+const buttonOpenPopupEditAvatar = document.querySelector('.profile__avatar-wrap');
+const avatarPicSelector = '.profile__avatar-pic';
+const formEditAvatar =document.querySelector('.popup__container_edit-avatar');
+
+// попап удаления
+const popupAskDeleteSelector = '.popup_ask-delete';
+
 
 // для окна добавления фото
 const popupAddPictSelector= '.popup_add-pict';
 const buttonOpenPopupAdd = document.querySelector('.profile__add-button');
 
 const formAdd = document.querySelector('.popup__container_add-photo');
-
-//общие для всех попапов
 
 
 //попап фуллсайз картинки
@@ -68,4 +81,6 @@ export {initialCards, config,template, buttonOpenPopupEdit ,
     nameInput, aboutInput,
     buttonOpenPopupAdd,  formAdd,formEdit,
      profileDescrSelector,profileNameSelector,popupEditUserProfileSelector,
-    popupAddPictSelector,popupShowPictSelector};
+    popupAddPictSelector,popupShowPictSelector,popupEditAvatarSelector,buttonOpenPopupEditAvatar,
+    avatarPicSelector,formEditAvatar,popupAskDeleteSelector,optionsApi
+};

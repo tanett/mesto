@@ -30,4 +30,6 @@ export class Popup{
         this._popup.addEventListener('click',(event)=>{this._onOverleyClick(event);});
         this._closeBtn.addEventListener('click', this.close.bind(this) );
     }
-}
+
+
+    }

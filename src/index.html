@@ -2,85 +2,112 @@
 <html lang="ru">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Место</title>
-<!--	<link rel="stylesheet" href="index.css">-->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Место</title>
+  <!--	<link rel="stylesheet" href="index.css">-->
 
 
 </head>
 
 <body class="page">
 <div class="page__wrap">
-	<header class="header">
-		<img class="header__logo" src="<%=require('./images/svg/Logo-mesto.svg')%>" alt="Лого">
-	</header>
-	<main class="main">
-		<section class="profile">
-			<div class="profile__wrap">
-				<img src="<%=require('./images/avatar.png')%>" alt="аватарка" class="profile__avatar">
-				<div class="profile__about">
-					<div class="profile__title">
-						<h1 class="profile__name">Жак-Ив Кусто</h1>
-						<button class="profile__edit-button" type="button"></button>
-					</div>
-					<p class="profile__descr">Исследователь океана</p>
-				</div>
-			</div>
-			<button class="profile__add-button" type="button"></button>
-		</section>
-		<section class="photo-grid">
+  <header class="header">
+    <img class="header__logo" src="<%=require('./images/svg/Logo-mesto.svg')%>" alt="Лого">
+  </header>
+  <main class="main">
+    <section class="profile">
+      <div class="profile__wrap">
+        <div class="profile__avatar-wrap" title="Изменить">
+          <img src="" alt="   ava" class="profile__avatar-pic">
+        </div>
+        <div class="profile__about">
+          <div class="profile__title">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button" type="button" title="Изменить профиль"></button>
+          </div>
+          <p class="profile__descr">Исследователь океана</p>
+        </div>
+      </div>
+      <button class="profile__add-button" type="button" title="Добавить картинку"  ></button>
+    </section>
+    <section class="photo-grid">
 
-		</section>
-	</main>
-	<footer class="footer">
-		<p class="footer__copyright">&copy; 2020 Mesto Russia</p>
-	</footer>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+  </footer>
 </div>
 <div class="popup popup_edit-user-profile">
-	<form class="popup__container popup__container_edit" name="editUserProfile">
-		<h2 class="popup__title">Редактировать профиль</h2>
-		<fieldset class="popup__inputs">
-			<input type="text" class="popup__input popup__input_name" minlength="2" maxlength="40" name="name" id="popup__input_name" placeholder="Имя" required>
-			<span class="popup__error-msg" id="popup__input_name-error"></span>
-			<input type="text" class="popup__input popup__input_about" minlength="2" maxlength="200" name="about" id="popup__input_about" required
-						 placeholder="Профессия">
-			<span class="popup__error-msg" id="popup__input_about-error"></span>
-			<button type="submit" class="popup__submit">Сохранить</button>
-		</fieldset>
-		<button class="popup__close-button" type="button"></button>
-	</form>
+  <form class="popup__container popup__container_edit" name="editUserProfile">
+    <h2 class="popup__title">Редактировать профиль</h2>
+    <fieldset class="popup__inputs">
+      <input type="text" class="popup__input popup__input_name" minlength="2" maxlength="40" name="name"
+             id="popup__input_name" placeholder="Имя" required>
+      <span class="popup__error-msg" id="popup__input_name-error"></span>
+      <input type="text" class="popup__input popup__input_about" minlength="2" maxlength="200" name="about"
+             id="popup__input_about" required
+             placeholder="Профессия">
+      <span class="popup__error-msg" id="popup__input_about-error"></span>
+      <button type="submit" class="popup__submit">Сохранить</button>
+    </fieldset>
+    <button class="popup__close-button" type="button" title="Закрыть"></button>
+  </form>
+</div>
+<div class="popup popup_edit-avatar">
+  <form class="popup__container popup__container_edit-avatar" name="editAvatar" id="editAvatar">
+    <h2 class="popup__title">Обновить аватар</h2>
+    <fieldset class="popup__inputs">
+      <input type="url" class="popup__input popup__input_link" id="popup__input-editAvatar_link" name="link"
+             placeholder="Ссылка на картинку" required>
+      <span class="popup__error-msg" id="popup__input-editAvatar_link-error"></span>
+      <button type="submit" class="popup__submit">Сохранить</button>
+    </fieldset>
+    <button class="popup__close-button" type="button" title="Закрыть"></button>
+  </form>
 </div>
 <div class="popup popup_add-pict">
-	<form class="popup__container popup__container_add-photo" name="addPict" id = "addPict">
-		<h2 class="popup__title">Новое место</h2>
-		<fieldset class="popup__inputs">
-			<input type="text" class="popup__input popup__input_title" minlength="2" maxlength="30" name="name" id="popup__input_title" placeholder="Название" required>
-			<span class="popup__error-msg" id="popup__input_title-error"></span>
-			<input type="url" class="popup__input popup__input_link" id="popup__input_link"  name="link"
-						 placeholder="Ссылка на картинку" required>
-			<span class="popup__error-msg" id="popup__input_link-error"></span>
-			<button type="submit" class="popup__submit">Сохранить</button>
-		</fieldset>
-		<button class="popup__close-button" type="button"></button>
-	</form>
+  <form class="popup__container popup__container_add-photo" name="addPict" id="addPict">
+    <h2 class="popup__title">Новое место</h2>
+    <fieldset class="popup__inputs">
+      <input type="text" class="popup__input popup__input_title" minlength="2" maxlength="30" name="name"
+             id="popup__input_title" placeholder="Название" required>
+      <span class="popup__error-msg" id="popup__input_title-error"></span>
+      <input type="url" class="popup__input popup__input_link" id="popup__input_link" name="link"
+             placeholder="Ссылка на картинку" required>
+      <span class="popup__error-msg" id="popup__input_link-error"></span>
+      <button type="submit" class="popup__submit">Сохранить</button>
+    </fieldset>
+    <button class="popup__close-button" type="button" title="Закрыть"></button>
+  </form>
 </div>
 <div class="popup popup_show-pict">
-	<figure class="popup__container popup__container_pict-container">
-		<img class="popup__fullsize-pict" src="#" alt="фото">
-		<figcaption class="popup__pict-title"></figcaption>
-		<button class="popup__close-button" type="button"></button>
-	</figure>
+  <figure class="popup__container popup__container_pict-container">
+    <img class="popup__fullsize-pict" src="#" alt="фото">
+    <figcaption class="popup__pict-title"></figcaption>
+    <button class="popup__close-button" type="button" title="Закрыть"></button>
+  </figure>
+</div>
+<div class="popup popup_ask-delete">
+  <div class="popup__container popup__container_ask-delete">
+    <button class="popup__close-button" type="button" title="Закрыть"></button>
+    <h2 class="popup__title popup__title_ask-delete">Вы уверены?</h2>
+    <button type="submit" class="popup__submit popup__submit_ask-delete">Да</button>
+  </div>
 </div>
 <template class="template">
-	<figure class="photo-grid__item">
-		<img class="photo-grid__picture" alt="картинка" src="#">
-		<figcaption class="photo-grid__item-title ">
-			<h2 class="photo-grid__item-name"></h2>
-			<button class="photo-grid__like" type="button"></button>
-		</figcaption>
-		<button class="photo-grid__trash" type="button"></button>
-	</figure>
+  <figure class="photo-grid__item">
+    <img class="photo-grid__picture" alt="картинка" src="#" title="Нажми для просмотра">
+    <figcaption class="photo-grid__item-title ">
+      <h2 class="photo-grid__item-name"></h2>
+      <div class="photo-grid__like-container">
+        <button class="photo-grid__like" type="button"></button>
+        <span class="photo-grid__like-count">4</span>
+      </div>
+    </figcaption>
+    <button class="photo-grid__trash" type="button" title="Удалить"></button>
+  </figure>
 </template>
 
 

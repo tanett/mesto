@@ -1,17 +1,33 @@
-
 export class UserInfo {
-    constructor(selectorUserName, selectorUserAbout) {
+    constructor(selectorUserName, selectorUserAbout, selectorAvatarPic) {
         this._userName = document.querySelector(selectorUserName);
         this._userAbout = document.querySelector(selectorUserAbout);
+        this._userLinkAvatar = document.querySelector(selectorAvatarPic)
+        this._name = '';
+        this._about = '';
+        this._avatar = '';
+        this._userId = '';
     }
+
     getUserInfo() {
-        const userInfoFromHtml = {};
-        userInfoFromHtml.name = this._userName.textContent;
-        userInfoFromHtml.about = this._userAbout.textContent;
-        return userInfoFromHtml;
+        const userInfo = {};
+        userInfo.name = this._userName.textContent;
+        userInfo.about = this._userAbout.textContent;
+        userInfo.avatar = this._userLinkAvatar.src;
+        userInfo.Id = this._userId;
+        return userInfo;
     }
-    setUserInfo({name, about}){
-        this._userName.textContent = name;
-        this._userAbout.textContent = about;
+
+
+    setUserInfo(data) {
+        this._userName.textContent = data.name;
+        this._userAbout.textContent = data.about;
+        this._avatar = data.avatar;
+        this._userId = data._id;
+
+    }
+
+    setUserAvatar(data) {
+        this._userLinkAvatar.src = data.avatar;
     }
 }

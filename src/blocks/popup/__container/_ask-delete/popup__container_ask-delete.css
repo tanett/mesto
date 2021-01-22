@@ -1,0 +1,10 @@
+.popup__container_ask-delete{
+
+    width: 430px;
+}
+
+@media screen and (max-width: 500px) {
+    .popup__container_ask-delete {
+        width: 240px;
+    }
+}
