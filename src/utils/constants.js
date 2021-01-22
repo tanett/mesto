@@ -1,30 +1,3 @@
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
-
 const config = {
     formSelector: '.popup__container',
     inputSelector: '.popup__input',
@@ -76,11 +49,12 @@ const formAdd = document.querySelector('.popup__container_add-photo');
 //попап фуллсайз картинки
 const popupShowPictSelector = '.popup_show-pict';
 
+const page = document.querySelector('.page');
 
-export {initialCards, config,template, buttonOpenPopupEdit ,
+export {config,template, buttonOpenPopupEdit ,
     nameInput, aboutInput,
     buttonOpenPopupAdd,  formAdd,formEdit,
      profileDescrSelector,profileNameSelector,popupEditUserProfileSelector,
     popupAddPictSelector,popupShowPictSelector,popupEditAvatarSelector,buttonOpenPopupEditAvatar,
-    avatarPicSelector,formEditAvatar,popupAskDeleteSelector,optionsApi
+    avatarPicSelector,formEditAvatar,popupAskDeleteSelector,optionsApi,page
 };

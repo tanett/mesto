@@ -14,9 +14,9 @@ import {
     nameInput, aboutInput, formEdit,
     buttonOpenPopupAdd, formAdd,
     profileNameSelector, profileDescrSelector, popupAddPictSelector,
-    popupEditUserProfileSelector, popupShowPictSelector, popupEditAvatarSelector,
+    popupEditUserProfileSelector, popupShowPictSelector, popupEditAvatarSelector,page,
     buttonOpenPopupEditAvatar, avatarPicSelector, formEditAvatar, popupAskDeleteSelector
-} from "../utils/utils.js";
+} from "../utils/constants.js";
 
 //--------------создание экземпляров классов
 
@@ -27,7 +27,7 @@ const api = new Api(optionsApi);
 const sectionRenderCards = new Section({renderer: renderStartCard}, config.photoGrid);
 
 //вызов класса с инфо юзера
-const userInfo = new UserInfo(profileNameSelector, profileDescrSelector, avatarPicSelector, api.getUserInfo()._id);
+const userInfo = new UserInfo(profileNameSelector, profileDescrSelector, avatarPicSelector);
 
 //попап добавления картинки - экземпляр класса PopupWithForm
 const popupAddImage = new PopupWithForm(formSubmitHandlerAddPict, popupAddPictSelector);
@@ -44,6 +44,10 @@ popupShowImage.setEventListeners();
 //попап редактирования аватарки
 const popupEditAvatar = new PopupWithForm(formSubmitHandlerEditAvatar, popupEditAvatarSelector);
 popupEditAvatar.setEventListeners();
+
+//попап подтверждения удаления
+const popupAskDelete = new PopupAsk(popupAskDeleteSelector,popupSubmitHandlerDeleteCard);
+popupAskDelete.setEventListeners();
 
 //-------------------функции-------
 
@@ -115,27 +119,38 @@ function formSubmitHandlerEditUserProfile(valuesFromInput) {
 
 // клик на корзину-> открыть попап с вопросом popupAskDelete
 function handlerTrashClick(cardID, trashEl) {
-    const popupAskDelete = new PopupAsk(popupSubmitHandlerDeleteCard, popupAskDeleteSelector, cardID, trashEl);
-    popupAskDelete.setEventListeners();
-    popupAskDelete.open();
+    popupAskDelete.open(cardID, trashEl);
+
 }
 
 //обработчик попапа  удаления
-function popupSubmitHandlerDeleteCard(cardID) {
+function popupSubmitHandlerDeleteCard(cardID, trashEl) {
     api.deleteCard(cardID)
         .catch(err => console.log(err));
+    trashEl.closest('.photo-grid__item').remove();
+    popupAskDelete.close();
+}
+const startLoadPage=()=>{
+    page.style.visibility = 'hidden';
+    Promise.all([api.getInitialCards(), api.getUserInfo()])
+        .then(data => {
+            sectionRenderCards.rendererAllElements(data[0], data[1]._id)
+            userInfo.setUserInfo(data[1]);
+            userInfo.setUserAvatar(data[1]);
+        }).catch(err => console.log(err))
+        .finally(()=>page.style.visibility = 'visible');
 }
 
-
+startLoadPage();
 /*         -----------------------------------------------------------------------------  */
 // получение карточек и установка данных пользователя с сервера
 
-Promise.all([api.getInitialCards(), api.getUserInfo()])
-    .then(data => {
-        sectionRenderCards.rendererAllElements(data[0], data[1]._id)
-        userInfo.setUserInfo(data[1]);
-        userInfo.setUserAvatar(data[1]);
-    }).catch(err => console.log(err));
+// Promise.all([api.getInitialCards(), api.getUserInfo()])
+//     .then(data => {
+//         sectionRenderCards.rendererAllElements(data[0], data[1]._id)
+//         userInfo.setUserInfo(data[1]);
+//         userInfo.setUserAvatar(data[1]);
+//     }).catch(err => console.log(err));
 
 //подключение валидации
 //для попапа редактирования
@@ -159,8 +174,10 @@ buttonOpenPopupEditAvatar.addEventListener('click', (e) => {
 
 buttonOpenPopupEdit.addEventListener('click', () => {
     const userData = userInfo.getUserInfo();
+    validatorPopupEditInfo.clearError();
     nameInput.value = userData.name;
     aboutInput.value = userData.about;
+
     popupEditInfo.open();
 });
 

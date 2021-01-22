@@ -2,25 +2,25 @@ import {Popup} from "./Popup.js";
 
 
 export class PopupAsk extends Popup {
-    constructor(handlerSubmit, popupSelector, cardId, trashEl) {
+    constructor(popupSelector,popupSubmitHandler) {
         super(popupSelector);
-        this._handlerSubmit = handlerSubmit;
-        this.cardId = cardId;
-        this._trash = trashEl
+        this._handlerSubmit = popupSubmitHandler;
+        this._submitBtn = this._popup.querySelector('.popup__submit');
     }
 
-    // setSubmitAction(action){
-    //     this._handlerSubmit = action;
-    // }
+    setSubmitAction(action){
+        this._handlerSubmit = action;
+    }
     setEventListeners() {
         super.setEventListeners();
-        this._submitBtn.addEventListener('click', (event) => {
-            event.preventDefault();
-            this._handlerSubmit(this.cardId);
-            this._trash.closest('.photo-grid__item').remove();
-            this.close()
-        });
+        this._submitBtn.addEventListener('click', ()=>this._handlerSubmit(this.cardId,this._trash));
 
     }
 
+    open(cardID, trashEl) {
+        super.open();
+        this.cardId=cardID;
+        this._trash=trashEl;
+
+    }
 }
