@@ -1,26 +1,20 @@
-import {Popup} from "./Popup.js";
+
+import {PopupWithForm} from "./PopupWithForm.js";
 
 
-export class PopupAsk extends Popup {
-    constructor(popupSelector,popupSubmitHandler) {
+export class PopupAsk extends PopupWithForm {
+    constructor(popupSelector) {
         super(popupSelector);
-        this._handlerSubmit = popupSubmitHandler;
-        this._submitBtn = this._popup.querySelector('.popup__submit');
     }
 
-    setSubmitAction(action){
-        this._handlerSubmit = action;
-    }
     setEventListeners() {
         super.setEventListeners();
-        this._submitBtn.addEventListener('click', ()=>this._handlerSubmit(this.cardId,this._trash));
-
+        this._submitBtn.addEventListener('click', ()=>this._handlerSubmit());
     }
 
     open(cardID, trashEl) {
         super.open();
-        this.cardId=cardID;
+        this._cardId=cardID;
         this._trash=trashEl;
-
     }
 }

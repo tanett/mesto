@@ -14,7 +14,7 @@ import {
     nameInput, aboutInput, formEdit,
     buttonOpenPopupAdd, formAdd,
     profileNameSelector, profileDescrSelector, popupAddPictSelector,
-    popupEditUserProfileSelector, popupShowPictSelector, popupEditAvatarSelector,page,
+    popupEditUserProfileSelector, popupShowPictSelector, popupEditAvatarSelector, page,
     buttonOpenPopupEditAvatar, avatarPicSelector, formEditAvatar, popupAskDeleteSelector
 } from "../utils/constants.js";
 
@@ -24,17 +24,41 @@ import {
 const api = new Api(optionsApi);
 
 //создание экземпляра  класса Section  для  рендеринга карточек
-const sectionRenderCards = new Section({renderer: renderStartCard}, config.photoGrid);
+const sectionRenderCards = new Section({
+    renderer: (cardData, userId) => {
+        sectionRenderCards.addItem(createCard(cardData, userId));
+    }
+}, config.photoGrid);
 
 //вызов класса с инфо юзера
 const userInfo = new UserInfo(profileNameSelector, profileDescrSelector, avatarPicSelector);
 
 //попап добавления картинки - экземпляр класса PopupWithForm
-const popupAddImage = new PopupWithForm(formSubmitHandlerAddPict, popupAddPictSelector);
+const popupAddImage = new PopupWithForm(popupAddPictSelector);
+popupAddImage.setSubmitAction(() => {
+        popupAddImage.renderLoading(true);
+        api.addCard(popupAddImage.getInputValues())
+            .then(data => {
+                sectionRenderCards.addItem(createCard(data, userInfo.getUserInfo().Id))
+            }).catch(err => console.log(err))
+            .finally(() => popupAddImage.renderLoading(false));
+        popupAddImage.close();
+    }
+);
 popupAddImage.setEventListeners();
 
 //попап редактирования инфо - экземпляр класса PopupWithForm
-const popupEditInfo = new PopupWithForm(formSubmitHandlerEditUserProfile, popupEditUserProfileSelector);
+const popupEditInfo = new PopupWithForm(popupEditUserProfileSelector);
+popupEditInfo.setSubmitAction(() => {
+    popupEditInfo.renderLoading(true);
+    api.editUserInfo(popupEditInfo.getInputValues())
+        .then(data => {
+            userInfo.setUserInfo(data)
+        }).catch(err => console.log(err))
+        .finally(() => popupEditInfo.renderLoading(false));
+    popupEditInfo.close();
+
+});
 popupEditInfo.setEventListeners();
 
 //попап просмотра картинки - экземпляр класса PopupWithImage
@@ -42,95 +66,65 @@ const popupShowImage = new PopupWithImage(popupShowPictSelector);
 popupShowImage.setEventListeners();
 
 //попап редактирования аватарки
-const popupEditAvatar = new PopupWithForm(formSubmitHandlerEditAvatar, popupEditAvatarSelector);
+const popupEditAvatar = new PopupWithForm(popupEditAvatarSelector);
+popupEditAvatar.setSubmitAction(() => {
+    popupEditAvatar.renderLoading(true);
+    api.editUserAvatar(popupEditAvatar.getInputValues())
+        .then(data => {
+            userInfo.setUserAvatar(data)
+        }).catch(err => console.log(err))
+        .finally(() => popupEditAvatar.renderLoading(false));
+    popupEditAvatar.close();
+
+});
 popupEditAvatar.setEventListeners();
 
 //попап подтверждения удаления
-const popupAskDelete = new PopupAsk(popupAskDeleteSelector,popupSubmitHandlerDeleteCard);
+const popupAskDelete = new PopupAsk(popupAskDeleteSelector);
+popupAskDelete.setSubmitAction(() => {
+    api.deleteCard(popupAskDelete._cardId)
+        .catch(err => console.log(err));
+    popupAskDelete._trash.closest('.photo-grid__item').remove();
+    popupAskDelete.close();
+
+});
 popupAskDelete.setEventListeners();
 
 //-------------------функции-------
 
 //функция создания карточки
 function createCard(cardData, userId) {
-    const cardItem = new Card(cardData, handleCardClick, handleLikeClick, handlerTrashClick, template, userId);
+    const cardItem = new Card(cardData, {
+            handleCardClick: (event) => {
+                popupShowImage.open(event);
+            }, handleLikeClick: (cardID, hasMyLike) => {
+                if (hasMyLike) {
+                    api.likeOff(cardID)
+                        .then(data => {
+                            cardItem.checkLikes(data);
+                        }).catch(err => console.log(err));
+                } else {
+                    api.likeOn(cardID)
+                        .then(data => {
+                            cardItem.checkLikes(data);
+                        }).catch(err => console.log(err));
+                }
+            }, handlerTrashClick: (cardId, trashEl) => {
+                popupAskDelete.open(cardId, trashEl);
+            }
+            ,
+            templateSelector: template
+        }
+        ,
+        userId
+        )
+    ;
     return cardItem.generateCard();
 }
 
-//функция  рендеринга для sectionInitialCards
-function renderStartCard(cardData, userId) {
-    sectionRenderCards.addItem(createCard(cardData, userId));
-}
-
-// обработчик добавления картинки в popupAddImage
-function formSubmitHandlerAddPict(valuesFromInput) {
-    popupAddImage.renderLoading(true);
-    api.addCard(valuesFromInput)
-        .then(data => {
-            sectionRenderCards.addItem(createCard(data, userInfo.getUserInfo().Id))
-        }).catch(err => console.log(err))
-        .finally(() => popupAddImage.renderLoading(false));
-    popupAddImage.close();
-}
-
-// функция открытия попапа просмотра  при клике на карточку
-function handleCardClick() {
-    popupShowImage.open(event);
-}
-
-// оработка клика по лайку
-function handleLikeClick(cardID, hasMyLike, likeCountElem, likeBtn) {
-    if (hasMyLike) {
-        api.likeOff(cardID)
-            .then(data => {
-                likeCountElem.textContent = data.likes.length;
-                likeBtn.classList.remove('photo-grid__like_on');
-            }).catch(err => console.log(err));
-    } else {
-        api.likeOn(cardID)
-            .then(data => {
-                likeCountElem.textContent = data.likes.length;
-                likeBtn.classList.add('photo-grid__like_on');
-            }).catch(err => console.log(err));
-    }
-}
-
-//обработчик в popupEditAvatar
-function formSubmitHandlerEditAvatar(valuesFromInput) {
-    popupEditAvatar.renderLoading(true);
-    api.editUserAvatar(valuesFromInput)
-        .then(data => {
-            userInfo.setUserAvatar(data)
-        }).catch(err => console.log(err))
-        .finally(() => popupEditAvatar.renderLoading(false));
-    popupEditAvatar.close();
-}
-
-// обработчик в  popupEditInfo
-function formSubmitHandlerEditUserProfile(valuesFromInput) {
-    popupEditInfo.renderLoading(true);
-    api.editUserInfo(valuesFromInput)
-        .then(data => {
-            userInfo.setUserInfo(data)
-        }).catch(err => console.log(err))
-        .finally(() => popupEditInfo.renderLoading(false));
-    popupEditInfo.close();
-}
-
-// клик на корзину-> открыть попап с вопросом popupAskDelete
-function handlerTrashClick(cardID, trashEl) {
-    popupAskDelete.open(cardID, trashEl);
-
-}
-
-//обработчик попапа  удаления
-function popupSubmitHandlerDeleteCard(cardID, trashEl) {
-    api.deleteCard(cardID)
-        .catch(err => console.log(err));
-    trashEl.closest('.photo-grid__item').remove();
-    popupAskDelete.close();
-}
-const startLoadPage=()=>{
+/*         -----------------------------------------------------------------------------  */
+// получение карточек и установка данных пользователя с сервера
+const startLoadPage = () => {//так не промаргивают при обновлении данные профиля из верстки
     page.style.visibility = 'hidden';
     Promise.all([api.getInitialCards(), api.getUserInfo()])
         .then(data => {
@@ -138,19 +132,11 @@ const startLoadPage=()=>{
             userInfo.setUserInfo(data[1]);
             userInfo.setUserAvatar(data[1]);
         }).catch(err => console.log(err))
-        .finally(()=>page.style.visibility = 'visible');
+        .finally(() => page.style.visibility = 'visible');
 }
 
 startLoadPage();
-/*         -----------------------------------------------------------------------------  */
-// получение карточек и установка данных пользователя с сервера
 
-// Promise.all([api.getInitialCards(), api.getUserInfo()])
-//     .then(data => {
-//         sectionRenderCards.rendererAllElements(data[0], data[1]._id)
-//         userInfo.setUserInfo(data[1]);
-//         userInfo.setUserAvatar(data[1]);
-//     }).catch(err => console.log(err));
 
 //подключение валидации
 //для попапа редактирования

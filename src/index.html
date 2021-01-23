@@ -19,7 +19,7 @@
     <section class="profile">
       <div class="profile__wrap">
         <div class="profile__avatar-wrap" title="Изменить">
-          <img  alt="ava" class="profile__avatar-pic" src="#">
+          <img alt="ava" class="profile__avatar-pic" src="#">
         </div>
         <div class="profile__about">
           <div class="profile__title">
@@ -29,7 +29,7 @@
           <p class="profile__descr">Исследователь океана</p>
         </div>
       </div>
-      <button class="profile__add-button" type="button" title="Добавить картинку"  ></button>
+      <button class="profile__add-button" type="button" title="Добавить картинку"></button>
     </section>
     <section class="photo-grid">
 
@@ -93,12 +93,14 @@
   <div class="popup__container popup__container_ask-delete">
     <button class="popup__close-button" type="button" title="Закрыть"></button>
     <h2 class="popup__title popup__title_ask-delete">Вы уверены?</h2>
-    <button type="submit" class="popup__submit popup__submit_ask-delete">Да</button>
+    <button type="submit" class="popup__submit">Да</button>
   </div>
 </div>
 <template class="template">
   <figure class="photo-grid__item">
-    <img class="photo-grid__picture" alt="картинка" src="#" title="Нажми для просмотра">
+    <div class="photo-grid__picture-wrap">
+      <img class="photo-grid__picture" alt="картинка" src="#" title="Нажми для просмотра">
+    </div>
     <figcaption class="photo-grid__item-title ">
       <h2 class="photo-grid__item-name"></h2>
       <div class="photo-grid__like-container">

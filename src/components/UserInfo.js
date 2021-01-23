@@ -22,7 +22,7 @@ export class UserInfo {
     setUserInfo(data) {
         this._userName.textContent = data.name;
         this._userAbout.textContent = data.about;
-        this._avatar = data.avatar;
+
         this._userId = data._id;
 
     }

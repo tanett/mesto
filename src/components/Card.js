@@ -1,5 +1,5 @@
 export class Card {
-    constructor(cardData, handleCardClick, handleLikeClick, handlerTrashClick, templateSelector, userId) {
+    constructor(cardData, {handleCardClick, handleLikeClick, handlerTrashClick, templateSelector}, userId) {
         this._templateSelector = templateSelector;
         this._cardData = cardData;
         this._name = cardData.name;
@@ -19,7 +19,8 @@ export class Card {
     getCardId() {
         return this._cardId
     }
-    _isOwner(){
+
+    _isOwner() {
         return this._ownerId === this.userId
     }
 
@@ -36,11 +37,12 @@ export class Card {
             this._likeBtn.classList.remove('photo-grid__like_on');
             this.hasMyLike = false;
         }
+        this._likeCountElem.textContent = data.likes.length;
     }
 
     _changeLike() {
-        this._handleLikeClick(this._cardId, this.hasMyLike, this._likeCountElem,this._likeBtn);
-         this.hasMyLike = !this.hasMyLike;
+        this._handleLikeClick(this._cardId, this.hasMyLike, this._likeCountElem, this._likeBtn);
+        this.hasMyLike = !this.hasMyLike;
 
     }
 
@@ -57,15 +59,15 @@ export class Card {
         this._trash.addEventListener('click', () => {
             this._handlerTrashClick(this._cardId,this._trash);
         });
-        this._photoGridPict.addEventListener('click', () => {
-            this._handleCardClick();
+        this._photoGridPict.addEventListener('click', (event) => {
+            this._handleCardClick(event);
         });
     }
 
 
-    removePhotoItem() {
+    removeCard() {
 
-        // this._trash.closest('.photo-grid__item').remove();
+        this._trash.closest('.photo-grid__item').remove();
     }
 
     generateCard() {
@@ -79,7 +81,9 @@ export class Card {
         this._photoGridPict.alt = this._name;
         this._cardElement.querySelector('.photo-grid__item-name').textContent = this._name;
         this._likeCountElem.textContent = this._likeCount;
-        if (!this._isOwner()) {this._trash.remove()}
+        if (!this._isOwner()) {
+            this._trash.remove()
+        }
         this.checkLikes(this._cardData);
         this._setEventListener();
 
